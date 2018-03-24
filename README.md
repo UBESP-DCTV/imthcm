@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+[![Travis build status](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=develop)](https://travis-ci.org/UBESP-DCTV/imthcm) [![Coverage status](https://codecov.io/gh/UBESP-DCTV/imthcm/branch/develop/graph/badge.svg)](https://codecov.io/github/UBESP-DCTV/imthcm?branch=develop)
+
 imthcm
 ======
-
-[![Travis build status](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=develop)](https://travis-ci.org/UBESP-DCTV/imthcm) [![Coverage status](https://codecov.io/gh/UBESP-DCTV/imthcm/branch/develop/graph/badge.svg)](https://codecov.io/github/UBESP-DCTV/imthcm?branch=develop)
 
 Introduction
 ------------
