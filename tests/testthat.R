@@ -1,4 +1,4 @@
 library(testthat)
-library(imthmcm)
+library(imthcm)
 
-test_check("imthmcm")
+test_check("imthcm")

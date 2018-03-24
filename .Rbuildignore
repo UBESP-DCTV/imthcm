@@ -1,6 +1,7 @@
-^imthmcm\.Rproj$
+^imthcm\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^README\.Rmd$
 ^appveyor\.yml$
 ^codecov\.yml$
+^LICENSE\.md$

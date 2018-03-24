@@ -12,12 +12,43 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# imthmcm
+# imthcm
 
 [![Travis build status](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=develop)](https://travis-ci.org/UBESP-DCTV/imthcm)
 [![Coverage status](https://codecov.io/gh/UBESP-DCTV/imthcm/branch/develop/graph/badge.svg)](https://codecov.io/github/UBESP-DCTV/imthcm?branch=develop)
 
-The goal of imthmcm is to ...
+## Introduction
+
+**REMEDIO** stands for “**RE**generating mixed-use **MED** urban communities
+congested by traffic through **I**nnovative low carbon mobility s**O**lutions”.
+
+**REMEDIO** is funded by Interreg MED Program 2014-2020 through the European
+Regional Developed Fund (ERDF) (<https://remedio.interreg-med.eu/>)
+
+**REMEDIO** implements concrete actions to relieve traffic congestion in
+middle-size Mediterranean cities where territorial institutions, supported by
+research/technical partners, are involved as beneficiary partners.
+
+**REMEDIO** is a testing project and is developed in 3 steps.
+
+- First Territorial partners implement soft actions on low carbon mobility
+  solutions (Sustanaible Urban Mobility Plans  in Treviso, Split and Loures,
+  Bike sharing Network in Spit and Treviso; bicycle parking areas in Loures,
+  bus rapid transit, multi modal public transport optimizations, green-taxiway,
+  safety road infrastructure for bus stops in Thessaloniki).
+  
+- Second Scientific partners jointly implement an Integrated Modelling Tool to
+  assess the present and future scenarios road performance in terms of energy
+  and freight transport efficiency, noise impact, air pollution, **cost** &
+  **health** effects.
+  
+- In the meanwhile, as third step, the city communities are engaged in testing
+  an operational path towards a participatory governance such as “horizontal
+  condominiums” or “road contracts” that should lead to higher environmental
+  and mobility performances.
+
+The goal of imthcm is to provide the **health** and **cost** modules for the
+Integrated Modelling Tool of REMEDIO project.
 
 ## Installation
 
