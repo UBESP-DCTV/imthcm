@@ -1,3 +1,8 @@
+# imthcm 0.0.2.9000
+
+* Added a short instructions to set up an R executable in `inst/foo/README`
+* Added a test file `inst/foo/test.R` to check executable capability
+
 # imthcm 0.0.1.9000
 
 * Added a `.travis.yml` file to configure travis CI.
