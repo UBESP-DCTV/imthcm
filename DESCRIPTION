@@ -23,8 +23,11 @@ LazyData: true
 ByteCompile: true
 Suggests: 
     testthat,
-    covr
+    covr,
+    knitr,
+    rmarkdown
 RoxygenNote: 6.0.1
 Depends: R (>= 3.1)
 Imports: 
     magrittr
+VignetteBuilder: knitr
