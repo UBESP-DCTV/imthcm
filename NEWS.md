@@ -1,5 +1,11 @@
 # imtchm 0.0.3.9000
 
+* Updated `data.R` with more comments.
+* Added `weather_lag.R` to provide base function to compute lags.
+* Added `preproc.R` to preproces weather data to comput lags.
+
+# imtchm 0.0.3.9000
+
 * Added `R/check_pkg.R` to test the presence of suggested packages in 
   interactive sessions.
 * Added Giulia Lorenzoni and Cristina Canova as contributed authors to the

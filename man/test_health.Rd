@@ -6,14 +6,14 @@
 \title{Test dataset for health input.}
 \format{A data frame with 1827 rows and 8 variables:
 \describe{
-  \item{date}{...}
-  \item{mort_all}{...}
-  \item{mort_cardiac}{...}
-  \item{mort_resp}{...}
-  \item{mort_cer}{...}
-  \item{hosp_cardiac}{...}
-  \item{hosp_resp}{...}
-  \item{hosp_cer}{...}
+  \item{date}{date of the day}
+  \item{mort_all}{number of deaths for all causes}
+  \item{mort_cardiac}{number of deaths for cardiac diseases}
+  \item{mort_resp}{number of deaths for respiratory diseases}
+  \item{mort_cer}{number of deaths for cerebrovascular diseases}
+  \item{hosp_cardiac}{number of hospitalizations for cardiac diseases}
+  \item{hosp_resp}{number of hospitalizations for respiratory diseases}
+  \item{hosp_cer}{number of hospitalizations for cerebrovascular diseases}
 }}
 \usage{
 test_health

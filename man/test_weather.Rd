@@ -6,13 +6,14 @@
 \title{Test dataset for weather input.}
 \format{A data frame with 1827 rows and 7 variables:
 \describe{
-  \item{date}{...}
-  \item{temp_mean}{...}
-  \item{press_bar_mean}{...}
-  \item{pm10}{...}
-  \item{pm25}{...}
-  \item{no2}{...}
-  \item{o38h}{...}
+  \item{date}{date of the day}
+  \item{temp_mean}{average daily temperature in Celsius}
+  \item{press_bar_mean}{average daily barometric pressure in hPa}
+  \item{pm10}{average daily concentration of PM10 in ug/m^3}
+  \item{pm25}{average daily concentration of PM2.5 in ug/m^3}
+  \item{no2}{average daily concentration of NO2 in ug/m^3}
+  \item{o38h}{maximum daily concentratio of O3 in ug/m^3 between 8h moving
+  averages of the period between april and september}
 }}
 \usage{
 test_weather
