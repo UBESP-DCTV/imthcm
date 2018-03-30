@@ -1,7 +1,18 @@
+# imtchm 0.0.3.9000
+
+* Added `R/check_pkg.R` to test the presence of suggested packages in 
+  interactive sessions.
+* Added Giulia Lorenzoni and Cristina Canova as contributed authors to the
+  package.
+* Added `data/test_health.rda` and `data/test_weather.rda` as basic test
+  data input.
+* Added `data-raw/test_data_input.R` to creat input data sample
+  (data frames).
+
 # imthcm 0.0.2.9000
 
-* Added a short instructions to set up an R executable in `inst/foo/README`
-* Added a test file `inst/foo/test.R` to check executable capability
+* Added a short instructions to set up an R executable in `inst/foo/README`.
+* Added a test file `inst/foo/test.R` to check executable capability.
 
 # imthcm 0.0.1.9000
 

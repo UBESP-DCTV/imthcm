@@ -1,5 +1,5 @@
 Package: imthcm
-Version: 0.0.2.9000
+Version: 0.0.3
 Title: Integrated Mdelling Tool -  Helath and Cost Modules
 Description: The goal of imthcm is to provide the **health** and **cost**
   modules for the Integrated Modelling Tool of REMEDIO project.
@@ -10,6 +10,12 @@ Authors@R: c(
     ),
     person('Daniele', 'Bottigliengo', role  = c('aut'),
       email = 'daniele.bottigliengo@phd.unipd.it'
+    ),
+    person('Giulia', 'lorenzoni', role = c('aut'), 
+      email = 'giulia.lorenzoni@unipd.it'
+    ),
+    person('Cristina', 'Canova', role = c('aut'), 
+      email = 'cristina.canova@unipd.it'
     ),
     person('Dario', 'Gregori', role = c('aut'), 
       email = 'dario.gregori@unipd.it'
@@ -25,9 +31,14 @@ Suggests:
     testthat,
     covr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    MASS,
+    utils
 RoxygenNote: 6.0.1
 Depends: R (>= 3.1)
 Imports: 
-    magrittr
+    magrittr,
+    lubridate,
+    tibble,
+    stats
 VignetteBuilder: knitr
