@@ -1,4 +1,9 @@
-# imtchm 0.0.6
+# imtchm 0.0.7.2
+
+* Updated `hm.R`
+
+
+# imtchm 0.0.7
 
 * Minor update to documentations.
 * Added `health_to_xml.R` and `xml_to_health` to convert health historical

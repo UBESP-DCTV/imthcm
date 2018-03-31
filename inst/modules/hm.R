@@ -45,21 +45,24 @@ if (!requireNamespace('imthcm', quietly = TRUE)) stop(
 )
 library(imthcm)
 
+
 # Read and manage XML of input ----------------------------------------
+
+weather_history <- read_xml_weather(opts[['--weather']])
 
 
 # Run the module
 
 hm_models <- train_event_models(
   health_events_history = read_xml_health(opts[['--events']]),
-  weather_history       = opts[['--weather']],
+  weather_history       = weather_history,
   use_ita               = opts[['--default']]
 )
 
 hm_predictions <- predict_hm(
   models          = hm_models,
-  weather_history = opts[['--weather']],
-  weather_today   = opts[['--new']]
+  weather_history = weather_history,
+  weather_today   =  read_xml_weather(opts[['--new']])
 )
 
 
