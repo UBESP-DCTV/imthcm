@@ -6,7 +6,6 @@ if (!requireNamespace('docopt', quietly = TRUE)) stop(
   paste0(
     'package `docopt` required\n',
     '       tip: run `install.packages(docopt, dependencies = TRUE)`\n',
-    '            or better `install_github("docopt/docopt.R")`\n',
     '            and rerun the program.'
   ),
   call. = FALSE
@@ -16,24 +15,31 @@ if (!requireNamespace('docopt', quietly = TRUE)) stop(
 ## variable `doc` and then let docopt parse them with `docopt(doc)`, which
 ## returns a list in which the command line arguments are accessible in the
 ## usual way.
+'Usage:
+  hm.R [--events=<predicted_events> --costs=<costs_tablesl> --output=<output> --figures=<figures_path>]
 
-'usage: cm.R [-i <input> (-c <costs> | -d) -o <output>]
+Options:
+-e <predicted_events> --events=<predicted_events>  Predicted events (hm.R module) [default: predicted_events.xml]
+-c <costs_table> --costs=<costs_table>             Costs tables for the events predicted [default: weather_new.xml]
+-o <output> --output=<output>                      tabular output file [default: cm_output.xml]
+-f <figures_path> --figures=<figures_path>         figure file (type based on the extension) [default: cm_figures.png]
 
-
-options:
-  -i --input=<input>    base input file output of hm.R [default: hm_out.xml]
-  -d                    ciao
-  -c --costs=<costs>    input XML file [default: cm_costs.xml]
-  -o --output=<output>  output file [default: cm_out.xml]
 ]' -> doc
 
-opts <- docopt(doc)
-
+opts <- docopt::docopt(doc)
 
 
 # BEGIN ===============================================================
+if (!requireNamespace('imthcm', quietly = TRUE)) stop(
+  paste0(
+    'package `imthcm` required\n',
+    '       tip: run `devtools::install_github("UBESP-DCTV/imthcm")`\n',
+    '       and rerun the program.'
+  ),
+  call. = FALSE
+)
+library(imthcm)
 
-str(opts)
 # Package check and loading -------------------------------------------
 
 

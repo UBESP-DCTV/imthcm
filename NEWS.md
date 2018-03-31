@@ -1,9 +1,16 @@
+# imtchm 0.0.11
+
+* Updated `.travis.yml`
+* Updated dependency from `R (3.4)`
+* Added `xml_to_prediction.R` to import predicted data
+
 # imtchm 0.0.10
 
 * Updated `DESCRIPTION` to add specific dependencies to `mgcv (>= 1.8.23)`.
 * Reshaped `inst/` folders.
 * Added `plot_pred_event_outcomes.R` and `plot_pred_event_outcomes_time.R`
     to create basic plots.
+
 
 # imtchm 0.0.9
 
@@ -15,6 +22,7 @@
 * Added `data-raw/test_xml_input.R` to create example of XML input file,
     which are stored in `data/`.
 * Updated `hm.R`.
+
 
 # imtchm 0.0.7.2
 

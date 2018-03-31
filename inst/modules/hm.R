@@ -18,22 +18,21 @@ if (!requireNamespace('docopt', quietly = TRUE)) stop(
 ## usual way.
 
 'Usage:
-  hm.R [((--weather=<weather_history> --events=<events_history.xml>) | --default) --new=<weather_new> --output=<output.xml> --figures=<figures_path> --single]
+  hm.R [((--weather=<weather_history> --events=<events_history>) | --default) --new=<weather_new> --output=<output> --figures=<figures_path> --single]
 
 Options:
-  -w <weather_history> --weather=<weather_history>       historical weather informations [default: weather_history.xml]
-  -e <events_history.xml> --events=<events_history.xml>  historical events informations  [default: events_history.xml]
-  -d --default                                           flag to use default italian weather and events data
-  -n <weather_new> --new=<weather_new>                   new weather informations        [default: weather_new.xml]
-  -o <output.xml> --output=<output.xml>                  tabular output file             [default: hm_output.xml]
-  -f <figures_path> --figures=<figures_path>             zip file containing pictures    [default: hm_figures.png]
-  -s --singe                                             flag to save a windowed daily plot [default: TRUE] or time smooth pattern
+  -w <weather_history> --weather=<weather_history>  historical weather informations [default: weather_history.xml]
+  -e <events_history> --events=<events_history>     historical events informations  [default: events_history.xml]
+  -d --default                                      flag to use default italian weather and events data
+  -n <weather_new> --new=<weather_new>              new weather informations        [default: weather_new.xml]
+  -o <output> --output=<output>                     tabular output file             [default: hm_output.xml]
+  -f <figures_path> --figures=<figures_path>        figure file (type based on the extension) [default: hm_figures.png]
+  -s --single                                       flag to save a windowed daily plot [default: TRUE] or time smooth pattern
 
 ]' -> doc
 
 opts <- docopt::docopt(doc)
 
-cat(str(opts))
 
 # BEGIN ===============================================================
 if (!requireNamespace('imthcm', quietly = TRUE)) stop(
@@ -47,7 +46,8 @@ if (!requireNamespace('imthcm', quietly = TRUE)) stop(
 library(imthcm)
 check_pkg(c(
   'magrittr', 'lubridate', 'tibble', 'stats', 'assertive', 'dplyr', 'purrr',
-  'glue', 'nlme', 'mgcv', 'rlang', 'tidyr', 'stringr', 'xml2', 'here'
+  'glue', 'nlme', 'mgcv', 'rlang', 'tidyr', 'stringr', 'xml2', 'here',
+  'ggplot2'
 ))
 
 if (packageVersion('mgcv') < '1.8.23') {

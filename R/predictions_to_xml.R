@@ -11,14 +11,15 @@
 #' @export
 #'
 #' @examples
-#' library(imthcm)
-#' default_models <- train_event_models(use_ita = TRUE)
-#' pred <- predict_hm(default_models,
-#'   test_weather, test_weather[c(730L, 731L), ]
-#' )
-#' predictions_to_xml(pred)
 #' \dontrun{
+#'   library(imthcm)
+#'   default_models <- train_event_models(use_ita = TRUE)
+#'   pred <- predict_hm(default_models,
+#'     test_weather, test_weather[c(730L, 731L), ]
+#'   )
 #'   predictions_to_xml(pred, file = 'predictions.xml')
+#'   imported_pred <- xml_to_prediction(file = 'predictions.xml')
+#'   identical(pred, imported_pred)
 #' }
 predictions_to_xml <- function(pred, file = NULL) {
 
