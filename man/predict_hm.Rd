@@ -72,8 +72,8 @@ This function predicts the number of considered health outcomes. Each
 outcome is predicted with GAM models previously trained on historical
 data. Once trained, GAM model estimates the number of health event of the
 simulated day with relative 95% CI. Predictions are returned as
-data frame. The data frame is composed by simulated days \times 7 rows
-and 5 columns. Each row gives the fitted number, with relative 95% CI, of
+data frame. The data frame is composed by simulated days: n rows
+and 6 columns. Each row gives the fitted number, with relative 95% CI, of
 considered health outcomes for each simulated day. Each column represents
 respectively the date of the simulated day, the health outcomes, the
 95% CI lower bound of the predicted average daily number of events, the

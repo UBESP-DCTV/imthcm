@@ -1,0 +1,7 @@
+To make an Rscript file executable type on the console
+
+chmod +x my script.R
+
+
+
+

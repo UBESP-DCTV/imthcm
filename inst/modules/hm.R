@@ -18,7 +18,7 @@ if (!requireNamespace('docopt', quietly = TRUE)) stop(
 ## usual way.
 
 'Usage:
-  hm.R [((--weather=<weather_history> --events=<events_history.xml>) | --default) --new=<weather_new> --output=<output.xml> --figures=<figures_path>]
+  hm.R [((--weather=<weather_history> --events=<events_history.xml>) | --default) --new=<weather_new> --output=<output.xml> --figures=<figures_path> --single]
 
 Options:
   -w <weather_history> --weather=<weather_history>       historical weather informations [default: weather_history.xml]
@@ -26,7 +26,8 @@ Options:
   -d --default                                           flag to use default italian weather and events data
   -n <weather_new> --new=<weather_new>                   new weather informations        [default: weather_new.xml]
   -o <output.xml> --output=<output.xml>                  tabular output file             [default: hm_output.xml]
-  -f <figures_path> --figures=<figures_path>             zip file containing pictures    [default: hm_figures]
+  -f <figures_path> --figures=<figures_path>             zip file containing pictures    [default: hm_figures.png]
+  -s --singe                                             flag to save a windowed daily plot [default: TRUE] or time smooth pattern
 
 ]' -> doc
 
@@ -85,6 +86,16 @@ hm_predictions <- predict_hm(
 # Provide/Save the output
 
 predictions_to_xml(hm_predictions, file = opts[['--output']])
+
+if (opts[['--single']]) {
+  plot_pred_event_outcomes(hm_predictions,
+    plot_file = opts[['--figure']]
+  )
+} else {
+  plot_pred_event_outcomes_time(hm_predictions,
+    plot_file = opts[['--figure']]
+  )
+}
 
 
 # END =================================================================

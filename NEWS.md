@@ -1,4 +1,11 @@
-# imtchm 0.0.8
+# imtchm 0.0.10
+
+* Updated `DESCRIPTION` to add specific dependencies to `mgcv (>= 1.8.23)`.
+* Reshaped `inst/` folders.
+* Added `plot_pred_event_outcomes.R` and `plot_pred_event_outcomes_time.R`
+    to create basic plots.
+
+# imtchm 0.0.9
 
 * Updated `hm.R`
 
