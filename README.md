@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis build status](https://travis-ci.com/UBESP-DCTV/imthcm.svg?branch=develop)](https://travis-ci.com/UBESP-DCTV/imthcm.svg?token=wGyFLep97LHjNKfPGjkg&branch=develop) [![Coverage status](https://codecov.io/gh/UBESP-DCTV/imthcm/branch/develop/graph/badge.svg)](https://codecov.io/github/UBESP-DCTV/imthcm?branch=develop)
+[![Travis build status](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=master)](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=master) [![Coverage status](https://codecov.io/gh/UBESP-DCTV/imthcm/branch/master/graph/badge.svg)](https://codecov.io/github/UBESP-DCTV/imthcm?branch=master)
 
 imthcm
 ======
@@ -38,19 +38,7 @@ You can install the development version from [GitHub](https://github.com/) with:
 devtools::install_github("UBESP-DCTV/imthcm")
 ```
 
-Example
--------
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-## basic example code
-```
-
 Bug reports
 -----------
 
-If you encounter a bug, please file a [reprex](https://github.com/tidyverse/reprex) (minimal reproducible example) to &lt;https:..github.com/UBESP-DCTV-imthcm/issues&gt;
-
-References
-----------
+If you encounter a bug, please file a [reprex](https://github.com/tidyverse/reprex) (minimal reproducible example) to <https//github.com/UBESP-DCTV-imthcm/issues>
