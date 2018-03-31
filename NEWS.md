@@ -1,5 +1,10 @@
 # imtchm 0.0.8
 
+* Updated `hm.R`
+
+
+# imtchm 0.0.8
+
 * Added `data-raw/test_xml_input.R` to create example of XML input file,
     which are stored in `data/`.
 * Updated `hm.R`.

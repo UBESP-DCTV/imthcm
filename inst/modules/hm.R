@@ -18,21 +18,21 @@ if (!requireNamespace('docopt', quietly = TRUE)) stop(
 ## usual way.
 
 'Usage:
-hm.R [(-w <weather_history> -e <events_history.xml> | -d)  -t <weather_new> -o <output.xml> -f <figures_path>]
+  hm.R [((--weather=<weather_history> --events=<events_history.xml>) | --default) --new=<weather_new> --output=<output.xml> --figures=<figures_path>]
 
 Options:
--w --weather  historical weather informations [default: weather_history.xml]
--e --events   historical events informations  [default: events_history.xml]
--d --default  flag to use default italian weather and events data [default: FALSE]
--n --new      new weather informations        [default: weather_new.xml]
--o --output   tabular output file             [default: hm_output.xml]
--f --figures  zip file containing pictures    [default: hm_figures]
+  -w <weather_history> --weather=<weather_history>       historical weather informations [default: weather_history.xml]
+  -e <events_history.xml> --events=<events_history.xml>  historical events informations  [default: events_history.xml]
+  -d --default                                           flag to use default italian weather and events data
+  -n <weather_new> --new=<weather_new>                   new weather informations        [default: weather_new.xml]
+  -o <output.xml> --output=<output.xml>                  tabular output file             [default: hm_output.xml]
+  -f <figures_path> --figures=<figures_path>             zip file containing pictures    [default: hm_figures]
 
 ]' -> doc
 
 opts <- docopt::docopt(doc)
 
-
+cat(str(opts))
 
 # BEGIN ===============================================================
 if (!requireNamespace('imthcm', quietly = TRUE)) stop(
@@ -44,12 +44,24 @@ if (!requireNamespace('imthcm', quietly = TRUE)) stop(
   call. = FALSE
 )
 library(imthcm)
+check_pkg(c(
+  'magrittr', 'lubridate', 'tibble', 'stats', 'assertive', 'dplyr', 'purrr',
+  'glue', 'nlme', 'mgcv', 'rlang', 'tidyr', 'stringr', 'xml2', 'here'
+))
 
-
+if (packageVersion('mgcv') < '1.8.23') {
+  imthcm:::please_install('mgcv', dependencies = TRUE)
+}
 # Read and manage XML of input ----------------------------------------
 
-weather_history <- xml_to_weather(opts[['--weather']])
+weather_history <- if (opts[['--default']]) {
+    test_weather
+  } else {
+    xml_to_weather(opts[['--weather']])
+}
 
+message(str(weather_history))
+message(str(test_weather))
 
 # Run the module
 
