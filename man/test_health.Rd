@@ -13,12 +13,19 @@
   \item{mort_cer}{number of deaths for cerebrovascular diseases}
   \item{hosp_cardiac}{number of hospitalizations for cardiac diseases}
   \item{hosp_resp}{number of hospitalizations for respiratory diseases}
-  \item{hosp_cer}{number of hospitalizations for cerebrovascular diseases}
+  \item{hosp_cer}{
+    number of hospitalizations for cerebrovascular diseases
+  }
 }}
 \usage{
 test_health
 }
 \description{
-A dataset containing ...
+A dataset containing simulated historical information on daily average
+number of health events. Number of deaths for all causes, cardiac
+diseases, respiratory diseases and cerebrovascular diseases are the
+mortality events considered. Number of hospitalizations for cardiac
+diseases, respiratory diseases and cerebrovascular diseases are the
+hospitalization events considered.
 }
 \keyword{datasets}

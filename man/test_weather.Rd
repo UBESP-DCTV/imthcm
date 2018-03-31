@@ -12,13 +12,21 @@
   \item{pm10}{average daily concentration of PM10 in ug/m^3}
   \item{pm25}{average daily concentration of PM2.5 in ug/m^3}
   \item{no2}{average daily concentration of NO2 in ug/m^3}
-  \item{o38h}{maximum daily concentratio of O3 in ug/m^3 between 8h moving
-  averages of the period between april and september}
+  \item{o38h}{
+    maximum daily concentratio of O3 in ug/m^3 between 8h moving averages
+    of the period between april and september
+  }
 }}
 \usage{
 test_weather
 }
 \description{
-A dataset containing ...
+A dataset containing simulated historical information on daily average
+weather variables values. Average daily temperature in Celsius, average
+daily barometric pressure in hPa, average daily concentration of PM10 in
+ug/m^3, avegare daily concentration of PM2.5 in ug/m^3, average daily
+concentration of NO2 in ug/m^3 and maximum daily concentratio of O3 in
+ug/m^3 between 8h moving averages of the period between april and
+september are the weather variables taken as inputs.
 }
 \keyword{datasets}

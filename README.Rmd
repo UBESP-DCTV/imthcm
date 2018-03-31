@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-[![Travis build status](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=develop)](https://travis-ci.org/UBESP-DCTV/imthcm)
+[![Travis build status](https://travis-ci.com/UBESP-DCTV/imthcm.svg?branch=develop)](https://travis-ci.com/UBESP-DCTV/imthcm.svg?token=wGyFLep97LHjNKfPGjkg&branch=develop)
 [![Coverage status](https://codecov.io/gh/UBESP-DCTV/imthcm/branch/develop/graph/badge.svg)](https://codecov.io/github/UBESP-DCTV/imthcm?branch=develop)
 
 # imthcm

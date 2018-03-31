@@ -1,3 +1,15 @@
+# imtchm 0.0.4
+
+* Improved function to preprocess data, changing its name from `pre_proc.R`
+  to `weather_preproc.R`.
+* Modified `weather_lag.R` to be self-contained, removing dependencies from
+  `zoo` package.
+* Added `event_models_ita` as default models already trained (row data
+  masked).
+* Updated documentation on datasets.
+* Added `train_event_models.R` to train the models.
+
+`
 # imtchm 0.0.3.9000
 
 * Updated `data.R` with more comments.

@@ -6,11 +6,11 @@
 \alias{weather_lag03}
 \title{Weather lag function creator}
 \usage{
-weather_lag(x, k)
+weather_lag(x, k, na.rm = TRUE)
 
-weather_lag01(x)
+weather_lag01(x, na.rm = TRUE)
 
-weather_lag03(x)
+weather_lag03(x, na.rm = TRUE)
 }
 \arguments{
 \item{x}{[num] numerical vector representig a weather daily mean
@@ -18,6 +18,9 @@ recording}
 
 \item{k}{[int] an integer of lenght one indicating how many days befor
 the actual (included) has to be considered for the mean}
+
+\item{na.rm}{[lgl] should \code{NA} be ignored when computed the roll
+mean? (default is \code{TRUE})}
 }
 \value{
 a numerical vector of the same lenght of \code{x} with the
@@ -27,13 +30,13 @@ a numerical vector of the same lenght of \code{x} with the
 \description{
 The aim of \code{weather_lag} is to provide functions to compute the
 the roll mean of pollutant mean daily concentrations, including
-necessary \code{NA} at the beginning
+necessary \code{NA} at the beginning.
 }
 \section{Functions}{
 \itemize{
 \item \code{weather_lag01}: wrapper function to compute
 \code{\link{weather_lag}} with \code{k} equal to 2, i.e., the
-mean for today and yesterday
+mean for today and yesterday.
 
 \item \code{weather_lag03}: wrapper function to compute
 \code{\link{weather_lag}} with \code{k} equal to 4, i.e., the

@@ -33,9 +33,12 @@ Suggests:
     knitr,
     rmarkdown,
     MASS,
-    utils
+    utils,
+    usethis,
+    devtools
 RoxygenNote: 6.0.1
-Depends: R (>= 3.1)
+Depends: 
+    R (>= 3.1)
 Imports: 
     magrittr,
     lubridate,
@@ -44,5 +47,7 @@ Imports:
     assertive,
     dplyr,
     purrr,
-    zoo
+    glue,
+    nlme,
+    mgcv
 VignetteBuilder: knitr

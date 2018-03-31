@@ -2,4 +2,7 @@
 
 export("%>%")
 export(check_pkg)
+export(train_event_models)
+export(weather_preproc)
+import(mgcv)
 importFrom(magrittr,"%>%")
