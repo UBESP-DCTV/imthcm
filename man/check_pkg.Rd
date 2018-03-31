@@ -8,6 +8,8 @@ check_pkg(pkgs)
 }
 \arguments{
 \item{pkgs}{charachter vector of package(s) to check for presence}
+
+\item{...}{further options for install_fun}
 }
 \value{
 invisible character vector with missing package

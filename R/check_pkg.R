@@ -49,6 +49,7 @@ please_install <- function(pkgs,
 #' Check basic installed packages
 #'
 #' @param pkgs charachter vector of package(s) to check for presence
+#' @param ... further options for install_fun
 #'
 #' @return invisible character vector with missing package
 #' @export
@@ -56,6 +57,5 @@ check_pkg <- function(pkgs) {
   have   <- rownames(utils::installed.packages())
   needed <- setdiff(pkgs, have)
 
-  please_install(needed, dependencies = TRUE)
   invisible(needed)
 }

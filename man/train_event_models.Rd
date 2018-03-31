@@ -9,20 +9,20 @@ train_event_models(health_events_history = NULL, weather_history = NULL,
 }
 \arguments{
 \item{health_events_history}{A data frame with historical health events
-data for at least one week each month of at least one year (full
-years are obviusly preferrend) are needed to take into
-account the stagionality. Colum names must be included in:
-- mort_all     = for daily number of death (any causes);
-- mort_cardiac = for daily number of death (cardiac causes only);
-- mort_resp    = for daily number of death
+data. At least one week for each month for at least one year (full
+years are obviusly preferrend) are needed in order to take into
+account seasonal trends. Colum names must be included in:
+- mort_all     = daily number of death (any causes);
+- mort_cardiac = daily number of death (cardiac causes only);
+- mort_resp    = daily number of death
   (respiratory casues only);
-- mort_cer     = for daily number of death
+- mort_cer     = daily number of death
   (cerebrovascular causes only);
-- hosp_cardiac = for daily number of hospitalization (cardiac
+- hosp_cardiac = daily number of hospitalization (cardiac
   causes only);
-- hosp_resp    = for daily number of hospitalization
+- hosp_resp    = daily number of hospitalization
   (respiratory casues only);
-- hosp_cer     = for daily number of hospitalization
+- hosp_cer     = daily number of hospitalization
   (cerebrovascular causes only);}
 
 \item{weather_history}{[data frame] A data frame with weather historical
@@ -42,7 +42,7 @@ account the stagionality. Colum names must be included in:
 
        If provided, by a column named \code{038h}, also information
        of O3 daily maximum concentration for the daily 8-hours
-       moving-mean will be used (only for summer period, i.e., from
+       moving-means will be used (only for summer period, i.e., from
        April, 1st, to September, 30th).}
 
 \item{...}{Other possible options passed to the function}
@@ -52,7 +52,7 @@ data on weather if the user cannot provide more specific data.}
 }
 \value{
 a list of three sets of gam models, one set with the summer model
-        for each type ov event provided in \code{health_events_history}
+        for each type of event provided in \code{health_events_history}
         (taking into account also information from O3), one set for the
         non-summer models (using only non-O3 pollutant information) and
         a set of full-year models which do not use information on O3
@@ -62,16 +62,16 @@ a list of three sets of gam models, one set with the summer model
         more informations.
 }
 \description{
-A function that trains models to estimates the average daily number of
+This function trains models that estimate the average daily number of
 events.
 }
 \details{
 The output is a list of three lists, named \code{summer},
-\code{non_summer} and \code{full_year}. The first two are usefull if
-ozone data are provided to assess a more specific model considering
-also ozone in summer period and only other pollutants in the rest of the
-year. The last set (i.e., list) of models are trained and aimed to be
-used without any knowledge about ozone concentrations.
+\code{non_summer} and \code{full_year}. The first two are used if
+ozone data are provided. They refer to a specific set of models that
+consider also the ozone in summer period and only other pollutants in the
+rest of the year. The last set (i.e., list) refers to a model that is
+used if any knowledge about ozone concentrations is provided.
 }
 \examples{
 \dontrun{

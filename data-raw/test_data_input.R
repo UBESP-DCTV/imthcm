@@ -1,7 +1,7 @@
 # Check packages dependencies =========================================
 
-check_pkg(c('MASS', 'lubridate', 'tibble', 'stats'))
-
+needed <- check_pkg(c('MASS', 'lubridate', 'tibble', 'stats'))
+please_install(needed)
 
 # global constants ====================================================
 

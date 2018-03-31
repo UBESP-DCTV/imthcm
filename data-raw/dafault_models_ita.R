@@ -1,4 +1,9 @@
 # (Auto) load needed package ==========================================
+check_pkg('imthcm') %>%
+  please_install(
+    install_fun = devtools::install_github,
+    repo        = 'https://github.com/UBESP-DCTV/imthcm'
+  )
 library(imthcm)
 # source('path/to/epiair_db_venice_pre_proc.rda')            # reserved data
 

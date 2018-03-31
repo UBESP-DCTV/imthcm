@@ -1,10 +1,17 @@
+# imtchm 0.0.6
+
+* Minor update to documentations.
+* Renamed `predict_event.R` in `predict_hm` as the provided function.
+* Updated `inst/modules/hm.R`.
+* Added `prediction_to_xml.R` to convert and write prediction to XML file.
+
 # imtchm 0.0.5
 
-* Updated test and default datased and models
-* Added `predict_event.R` to comput the predictions
+* Updated test and default datased and models.
+* Added `predict_event.R` to comput the predictions.
 * Removed `dd` variable in the preprocessing and in themodel and included
   interaction between its component (with `dd` no future-prediction were
-  possible because levels for future year were not present)
+  possible because levels for future year were not present).
 
 # imtchm 0.0.4
 

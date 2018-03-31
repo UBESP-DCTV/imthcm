@@ -18,20 +18,15 @@ if (!requireNamespace('docopt', quietly = TRUE)) stop(
 ## usual way.
 
 'Usage:
-hm.R [--historical <mean> -s <sd> -n <nsamples> -o <output>]
-hm.R --option <argument>
-hm.R [<optional-argument>]
-hm.R --another-option=<with-argument>
-hm.R (--either-that-option | <or-this-argument>)
-hm.R <repeating-argument> <repeating-argument>...
-hm.R [options] FILE
+hm.R [(-w <weather_history> -e <events_history.xml> | -d)  -t <weather_new> -o <output.xml> -f <figures_path>]
 
 Options:
--o --output=OUTPUT  output file [default: out.csv] (at least two spaces)
--m Mean of distribution to sample from [default: 0]
--s SD of distribution to sample from [default: 1]
--n Number of samples [default: 100]
--o Output file [default: sim_data.csv]
+-w --weather  historical weather informations [default: weather_history.xml]
+-e --events   historical events informations  [default: events_history.xml]
+-d --default  flag to use default italian weather and events data [default: FALSE]
+-n --new      new weather informations        [default: weather_new.xml]
+-o --output   tabular output file             [default: hm_output.xml]
+-f --figures  zip file containing pictures    [default: hm_figures]
 
 ]' -> doc
 
@@ -40,7 +35,15 @@ opts <- docopt::docopt(doc)
 
 
 # BEGIN ===============================================================
-
+if (!requireNamespace('imthcm', quietly = TRUE)) stop(
+  paste0(
+    'package `imthcm` required\n',
+    '       tip: run `devtools::install_github("UBESP-DCTV/imthcm")`\n',
+    '       and rerun the program.'
+  ),
+  call. = FALSE
+)
+library(imthcm)
 
 # Read and manage XML of input ----------------------------------------
 
@@ -50,8 +53,23 @@ opts <- docopt::docopt(doc)
 
 # Run the module
 
+hm_models <- train_event_models(
+  health_events_history = opts[['--events']],
+  weather_history       = opts[['--weather']],
+  use_ita               = opts[['--default']]
+)
+
+hm_predictions <- predict_hm(
+  models          = hm_models,
+  weather_history = opts[['--weather']],
+  weather_today   = opts[['--new']]
+)
+
 
 # Prepare the output
+
+predictions_to_xml(hm_predictions, file = opts[['--output']])
+
 
 
 # Provide/Save the output

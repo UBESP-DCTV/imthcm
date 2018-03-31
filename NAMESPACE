@@ -3,6 +3,7 @@
 export("%>%")
 export(check_pkg)
 export(predict_hm)
+export(predictions_to_xml)
 export(train_event_models)
 export(weather_preproc)
 import(mgcv)
