@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weather_history>
+  <environmental date="2016-12-30" temp_mean="15.6325665961591" press_bar_mean="1035.23232011294" pm10="61.1924130678141" pm25="37.8025615232948" no2="38.6759202720868" o38h="27.7577191759505"/>
+  <environmental date="2016-12-31" temp_mean="12.7244431540461" press_bar_mean="910.714214330296" pm10="58.9675482915674" pm25="32.9518466235462" no2="51.3680133222984" o38h="59.165392266195"/>
+</weather_history>
