@@ -1,21 +1,72 @@
 #' Predict function for Health module
 #'
-#' @param models [lst] TO BE COMMENTED
-#' @param weather_history [data frame] TO BE COMMENTED
-#' @param weather_today [data frame] TO BE COMMENTED
-#' @param ... possible further arguments passed to the function
-#' @param full_year [lgl] should be models (and prediction) made on the
-#'        same full-year data or model should distinguish from summer
-#'        period and non-summer period? If \code{TRUE} full-year models
-#'        are used. By default, full-year are used in the case of missing
-#'        summer- or non-summer-model or if \code{weather_history} or
-#'        \code{weather_today} do not have ozone information (i.e., there
-#'        are no \code{o38h} variable)
+#' This function predicts the number of considered health outcomes. Each
+#' outcome is predicted with GAM models previously trained on historical
+#' data. Once trained, GAM model estimates the number of health event of the
+#' simulated day with relative 95% CI. Predictions are returned as
+#' data frame. The data frame is composed by simulated days \times 7 rows
+#' and 5 columns. Each row gives the fitted number, with relative 95% CI, of
+#' considered health outcomes for each simulated day. Each column represents
+#' respectively the date of the simulated day, the health outcomes, the
+#' 95% CI lower bound of the predicted average daily number of events, the
+#' predicted average daily number of events and the the 95% CI upper bound
+#' of the predicted average daily number of events.
 #'
-#' @return a data frame with the fitted value (i.e., mean event predicted)
-#'         including 95% Confidence Interval (column \code{lower} and
-#'         \code{upper}) for each type of event mange by the models used for
-#'         each date considered.
+#' @param models [lst] A list with 7 elements. Each element corresponds to
+#'        previously trained model for the outcome of interest.
+#'
+#' @param weather_history [data frame] A data frame with weather historical
+#'        data with number of rows equal to the lenght of
+#'        \code{health_events_history} and at least the following column
+#'        (with exactly the same column names):
+#'        - date           = date expressed in the format 'yyyy-mm-dd';
+#'        - temp_mean      = mean temperature of corresponding day
+#'                           (Celsius);
+#'        - press_bar_mean = mean pressure of corresponding day (hPascal);
+#'        - pm10           = mean value of pm10 of corresponding day
+#'                           (\eqn{\mu g/m^3});
+#'        - pm25           = mean value of pm25 of corresponding day
+#'                           (\eqn{\mu g/m^3});
+#'        - no2            = mean value of no2  of corresponding day
+#'                           (\eqn{\mu g/m^3}).
+#'
+#'        If provided, by a column named \code{038h}, also information
+#'        of O3 daily maximum concentration for the daily 8-hours
+#'        moving-means will be used (only for summer period, i.e., from
+#'        April, 1st, to September, 30th).
+#'
+#' @param weather_today [data frame] A data frame with data on weather of
+#'        the simulated day. The dataframe must contains a number of rows
+#'        equal to the lenght of \code{health_events_history} and at least
+#'        the following column (with exactly the same column names):
+#'        - date           = date expressed in the format 'yyyy-mm-dd';
+#'        - temp_mean      = mean temperature of corresponding day
+#'                           (Celsius);
+#'        - press_bar_mean = mean pressure of corresponding day (hPascal);
+#'        - pm10           = mean value of pm10 of corresponding day
+#'                           (\eqn{\mu g/m^3});
+#'        - pm25           = mean value of pm25 of corresponding day
+#'                           (\eqn{\mu g/m^3});
+#'        - no2            = mean value of no2  of corresponding day
+#'                           (\eqn{\mu g/m^3}).
+#'
+#'        If provided, by a column named \code{038h}, also information
+#'        of O3 daily maximum concentration for the daily 8-hours
+#'        moving-means will be used (only for summer period, i.e., from
+#'        April, 1st, to September, 30th).
+#'
+#' @param ... possible further arguments passed to the function
+#' @param full_year [lgl] should the models (and prediction) be made on the
+#'        same full-year data or should summer or non-summer models be used?
+#'        If \code{TRUE} full-year models are used. By default,
+#'        full-year are used in the of missing summer- or non-summer-model
+#'        or if \code{weather_history} or \code{weather_today} do not have
+#'        ozone information (i.e., there are no \code{o38h} variable)
+#'
+#' @return a data frame with the fitted value (i.e., average predicted
+#'         events) including 95% Confidence Interval (column \code{lower}
+#'         and \code{upper}) for each type of event mange by the models used
+#'         for each date considered.
 #'
 #' @import mgcv
 #' @importFrom rlang !!
@@ -105,7 +156,7 @@ predict_hm <- function(
   )) {
     stop(glue::glue("Date of provided today_weather is
       {weather_today[['date']][[1]]}. History_weather must contains
-      information about at least three previous date, i.e.
+      information about at least three previous days, i.e.
       {paste(weather_today[['date']][[1]] - c(1, 2, 3), collapse = ', ')}.
       Please provide a more complete dataset for historical data"
     ))

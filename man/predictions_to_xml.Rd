@@ -12,7 +12,7 @@ predictions_to_xml(pred, file = NULL)
 
 \item{file}{[chr] (default is NULL) if provided as
 \code{"path/to/xml/output/xml"} the function write the
-XML in this file.}
+XML in this file (note: folder must be exists).}
 }
 \value{
 an (invisible) XML document

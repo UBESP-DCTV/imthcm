@@ -1,5 +1,5 @@
 Package: imthcm
-Version: 0.0.6
+Version: 0.0.7
 Title: Integrated Mdelling Tool -  Helath and Cost Modules
 Description: The goal of imthcm is to provide the **health** and **cost**
   modules for the Integrated Modelling Tool of REMEDIO project.
@@ -53,5 +53,6 @@ Imports:
     rlang,
     tidyr,
     stringr,
-    xml2
+    xml2,
+    here
 VignetteBuilder: knitr

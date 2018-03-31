@@ -48,13 +48,10 @@ library(imthcm)
 # Read and manage XML of input ----------------------------------------
 
 
-# Process input for the module
-
-
 # Run the module
 
 hm_models <- train_event_models(
-  health_events_history = opts[['--events']],
+  health_events_history = read_xml_health(opts[['--events']]),
   weather_history       = opts[['--weather']],
   use_ita               = opts[['--default']]
 )
@@ -68,11 +65,11 @@ hm_predictions <- predict_hm(
 
 # Prepare the output
 
-predictions_to_xml(hm_predictions, file = opts[['--output']])
-
 
 
 # Provide/Save the output
+
+predictions_to_xml(hm_predictions, file = opts[['--output']])
 
 
 # END =================================================================

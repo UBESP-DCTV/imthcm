@@ -5,7 +5,7 @@
 #'             \code{\link{predict_hm}}.
 #' @param file [chr] (default is NULL) if provided as
 #'             \code{"path/to/xml/output/xml"} the function write the
-#'             XML in this file.
+#'             XML in this file (note: folder must be exists).
 #'
 #' @return an (invisible) XML document
 #' @export
