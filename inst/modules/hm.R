@@ -48,7 +48,7 @@ library(imthcm)
 
 # Read and manage XML of input ----------------------------------------
 
-weather_history <- read_xml_weather(opts[['--weather']])
+weather_history <- xml_to_weather(opts[['--weather']])
 
 
 # Run the module
@@ -62,7 +62,7 @@ hm_models <- train_event_models(
 hm_predictions <- predict_hm(
   models          = hm_models,
   weather_history = weather_history,
-  weather_today   =  read_xml_weather(opts[['--new']])
+  weather_today   = xml_to_weather(opts[['--new']])
 )
 
 
