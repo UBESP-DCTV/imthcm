@@ -1,7 +1,7 @@
 library(imthcm)
 
 weather_to_xml(test_weather,
-  file = here::here('data/test_weather_history')
+  file = here::here('data/test_weather_history.xml')
 )
 
 
