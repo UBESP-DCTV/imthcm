@@ -12,15 +12,17 @@
 #'
 #'
 #' @param health_events_history A data frame with historical health events
-#'        data for at least one month (one year is preferred to take into
-#'        account the stagionality). Colum names must be included in:
+#'        data for at least one week each month of at least one year (full
+#'        years are obviusly preferrend) are needed to take into
+#'        account the stagionality. Colum names must be included in:
 #'        - mort_all     = for daily number of death (any causes);
 #'        - mort_cardiac = for daily number of death (cardiac causes only);
 #'        - mort_resp    = for daily number of death
 #'          (respiratory casues only);
 #'        - mort_cer     = for daily number of death
 #'          (cerebrovascular causes only);
-#'        - hosp_cardiac = for daily number of hospitalization (cardiac causes only);
+#'        - hosp_cardiac = for daily number of hospitalization (cardiac
+#'          causes only);
 #'        - hosp_resp    = for daily number of hospitalization
 #'          (respiratory casues only);
 #'        - hosp_cer     = for daily number of hospitalization
@@ -28,8 +30,8 @@
 #'
 #' @param weather_history [data frame] A data frame with weather historical
 #'        data with number of rows equal to the lenght of
-#'        \code{health_events_history} and at least the following column (with
-#'        exactly the same column names):
+#'        \code{health_events_history} and at least the following column
+#'        (with exactly the same column names):
 #'        - date           = date expressed in the format 'yyyy-mm-dd';
 #'        - temp_mean      = mean temperature of corresponding day
 #'                           (Celsius);
@@ -113,7 +115,7 @@ train_event_models <- function(health_events_history = NULL,
     magrittr::set_names(., .)
 
 
-  assertive::assert_all_are_true(events_considered != character(0L))
+  assertive::assert_all_are_true(length(events_considered) != 0)
 
 # Run -----------------------------------------------------------------
 
@@ -133,7 +135,8 @@ train_event_models <- function(health_events_history = NULL,
   # Train for full year data
   full_year  <- purrr::map(events_considered,
     ~ mgcv::gam(
-      formula = stats::as.formula(glue::glue({.x}, " ~ dd + lag_03_pm25 +
+      formula = stats::as.formula(glue::glue("{.x} ~ lag_03_pm25 +
+        (year + month + day_week)^3 +
         s(temp_mean, bs = 'cr') + s(press_bar_mean, bs = 'cr')"
       )),
       data    = health_events_data,
@@ -145,11 +148,11 @@ train_event_models <- function(health_events_history = NULL,
   # check for O3 presence
   if (all(is.na(weather_history[['o38h']]))) {
     summer     <- stats::setNames(
-      vector('list', length(health_events_history)),
+      vector('list', length(events_considered)),
       events_considered
     )
     non_summer <- stats::setNames(
-      vector('list', length(health_events_history)),
+      vector('list', length(events_considered)),
       events_considered
     )
   } else {
@@ -157,16 +160,15 @@ train_event_models <- function(health_events_history = NULL,
     # split summer and non-summer data
     health_events_data <- health_events_data %>%
       dplyr::mutate(
-        is_summer = (month >= 4) & (month <= 9)
+        is_summer = month %in% c(4, 5, 6, 7, 8, 9)
     )
 
     # Summer model
     summer  <- purrr::map(events_considered,
       ~ mgcv::gam(
-        formula = stats::as.formula(glue::glue({.x},
-          " ~ dd + lag_03_pm25 + lag_03_o38h +",
-          "   s(temp_mean, bs = 'cr')  +",
-          "   s(press_bar_mean, bs = 'cr')"
+        formula = stats::as.formula(glue::glue("{.x} ~ (year + month +
+          day_week)^3 + lag_03_pm25 + lag_03_o38h +
+          s(temp_mean, bs = 'cr') + s(press_bar_mean, bs = 'cr')"
         )),
         data    = dplyr::filter(health_events_data, is_summer) %>%
           dplyr::select(-is_summer) %>%
@@ -179,7 +181,7 @@ train_event_models <- function(health_events_history = NULL,
     non_summer  <- purrr::map(events_considered,
       ~ mgcv::gam(
         formula = stats::as.formula(glue::glue({.x},
-          " ~ dd + lag_03_pm25 +",
+          " ~ (year + month + day_week)^3 + lag_03_pm25 +",
           "   s(temp_mean, bs = 'cr')  +",
           "   s(press_bar_mean, bs = 'cr')"
         )),

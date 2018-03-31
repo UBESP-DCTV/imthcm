@@ -2,7 +2,9 @@
 
 export("%>%")
 export(check_pkg)
+export(predict_hm)
 export(train_event_models)
 export(weather_preproc)
 import(mgcv)
 importFrom(magrittr,"%>%")
+importFrom(rlang,"!!")

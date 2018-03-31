@@ -1,3 +1,11 @@
+# imtchm 0.0.5
+
+* Updated test and default datased and models
+* Added `predict_event.R` to comput the predictions
+* Removed `dd` variable in the preprocessing and in themodel and included
+  interaction between its component (with `dd` no future-prediction were
+  possible because levels for future year were not present)
+
 # imtchm 0.0.4
 
 * Improved function to preprocess data, changing its name from `pre_proc.R`

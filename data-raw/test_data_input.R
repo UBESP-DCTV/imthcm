@@ -5,7 +5,7 @@ check_pkg(c('MASS', 'lubridate', 'tibble', 'stats'))
 
 # global constants ====================================================
 
-first_date <- lubridate::ymd('2012-01-01')
+first_date <- lubridate::ymd('2015-01-01')
 last_date  <- lubridate::ymd('2016-12-31')
 n_days     <- as.integer(last_date - first_date) + 1L
 

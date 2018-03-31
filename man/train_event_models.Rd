@@ -9,15 +9,17 @@ train_event_models(health_events_history = NULL, weather_history = NULL,
 }
 \arguments{
 \item{health_events_history}{A data frame with historical health events
-data for at least one month (one year is preferred to take into
-account the stagionality). Colum names must be included in:
+data for at least one week each month of at least one year (full
+years are obviusly preferrend) are needed to take into
+account the stagionality. Colum names must be included in:
 - mort_all     = for daily number of death (any causes);
 - mort_cardiac = for daily number of death (cardiac causes only);
 - mort_resp    = for daily number of death
   (respiratory casues only);
 - mort_cer     = for daily number of death
   (cerebrovascular causes only);
-- hosp_cardiac = for daily number of hospitalization (cardiac causes only);
+- hosp_cardiac = for daily number of hospitalization (cardiac
+  causes only);
 - hosp_resp    = for daily number of hospitalization
   (respiratory casues only);
 - hosp_cer     = for daily number of hospitalization
@@ -25,8 +27,8 @@ account the stagionality). Colum names must be included in:
 
 \item{weather_history}{[data frame] A data frame with weather historical
        data with number of rows equal to the lenght of
-       \code{health_events_history} and at least the following column (with
-       exactly the same column names):
+       \code{health_events_history} and at least the following column
+       (with exactly the same column names):
        - date           = date expressed in the format 'yyyy-mm-dd';
        - temp_mean      = mean temperature of corresponding day
                           (Celsius);
