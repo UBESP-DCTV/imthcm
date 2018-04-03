@@ -4,10 +4,11 @@
 \alias{check_pkg}
 \title{Check basic installed packages}
 \usage{
-check_pkg(pkgs)
+check_pkg(pkgs = imthcm_packages)
 }
 \arguments{
-\item{pkgs}{charachter vector of package(s) to check for presence}
+\item{pkgs}{charachter vector of package(s) to check for presence
+(default is the vector of packages needed for imthcm package)}
 
 \item{...}{further options for install_fun}
 }

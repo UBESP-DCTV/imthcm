@@ -33,7 +33,6 @@ Options:
 
 opts <- docopt::docopt(doc)
 
-
 # BEGIN ===============================================================
 if (!requireNamespace('imthcm', quietly = TRUE)) stop(
   paste0(
@@ -61,13 +60,10 @@ weather_history <- if (opts[['--default']]) {
     xml_to_weather(opts[['--weather']])
 }
 
-message(str(weather_history))
-message(str(test_weather))
-
 # Run the module
 
 hm_models <- train_event_models(
-  health_events_history = read_xml_health(opts[['--events']]),
+  health_events_history = xml_to_health(opts[['--events']]),
   weather_history       = weather_history,
   use_ita               = opts[['--default']]
 )
@@ -77,11 +73,6 @@ hm_predictions <- predict_hm(
   weather_history = weather_history,
   weather_today   = xml_to_weather(opts[['--new']])
 )
-
-
-# Prepare the output
-
-
 
 # Provide/Save the output
 
@@ -93,9 +84,8 @@ if (opts[['--single']]) {
   )
 } else {
   plot_pred_event_outcomes_time(hm_predictions,
-    plot_file = opts[['--figure']]
+    plot_file = opts[['--figures']]
   )
 }
-
 
 # END =================================================================

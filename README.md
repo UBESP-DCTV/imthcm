@@ -31,12 +31,65 @@ Installation
 <!-- ``` r -->
 <!-- install.packages("imthmcm") -->
 <!-- ``` -->
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the development version from [GitHub](https://github.com/) with the following procedure:
+
+-   If you do not have the `devtools` package installed, please install it by
 
 ``` r
-# install.packages("devtools")
+install.packages("devtools", dependencies = TRUE)
+```
+
+-   Now you can install the package from github
+
+``` r
 devtools::install_github("UBESP-DCTV/imthcm")
 ```
+
+-   and load it
+
+``` r
+library(imthcm)
+```
+
+-   Once installed and loaded you can use the `check_package()` and `please_install()` functions (which work only in interactive mode) to check if you have all the needed package installed and updated:
+
+``` r
+check_pkg()
+
+## Furter check for a particouar version of mgcv
+if (packageVersion('mgcv') < 1.8.23) {
+  please_install('mgcv', dependencies = TRUE)
+}
+```
+
+Now you have installed and loaded all the necessary package for the modules. The modules and the example files are in the package folder `inst/modules/` and `inst/test_xml/` respectively. Once installed, those folder where put one level up, i.e. out of the `inst/` folder. You can have a direct access to those going into the corresponding system folder:
+
+``` r
+system.file('modules', 'hm.R', package = 'imthcm')
+#> [1] "/home/corrado/R/x86_64-pc-linux-gnu-library/3.4/imthcm/modules/hm.R"
+system.file('modules', 'cm.R', package = 'imthcm')
+#> [1] "/home/corrado/R/x86_64-pc-linux-gnu-library/3.4/imthcm/modules/cm.R"
+
+system.file('test_xml', 'test_event_history.xml',   package = 'imthcm')
+#> [1] "/home/corrado/R/x86_64-pc-linux-gnu-library/3.4/imthcm/test_xml/test_event_history.xml"
+system.file('test_xml', 'test_weather_history.xml', package = 'imthcm')
+#> [1] "/home/corrado/R/x86_64-pc-linux-gnu-library/3.4/imthcm/test_xml/test_weather_history.xml"
+system.file('test_xml', 'test_weather_new.xml',     package = 'imthcm')
+#> [1] "/home/corrado/R/x86_64-pc-linux-gnu-library/3.4/imthcm/test_xml/test_weather_new.xml"
+```
+
+To run th emodules you have to say to the system that they are "executable" by
+
+    chmod +x path/to/modules/folder/hm.R
+    chmod +x path/to/modules/folder/cm.R
+
+Note, you can copy those files and run them everywhere you prefer: the modules automatically load the package and find inside every function they need. So suppose you have the Health Module in `./` and the examples XML files in `./test_xml/` folder respectively. So, e.g., you can run the module with italian defaults training data and models by the following command
+
+    ./hm.R -d -n ./test_xml/test_weather_new.xml -o my_output.xml -f my_figure.png
+
+Or using the test XML history files (and also changing the figure device) by
+
+    ./hm.R -w ./test_xml/test_weather_history.xml -e ./test_xml/test_event_history.xml -n ./test_xml/test_weather_new.xml -o my_output.xml -f my_figure.pdf
 
 Bug reports
 -----------

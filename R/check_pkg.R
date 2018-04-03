@@ -8,6 +8,7 @@
 #' @param install_fun fuction to use for installing package(s)
 #' @param ... further options for install_fun
 #'
+#' @export
 #' @return invisible
 please_install <- function(pkgs,
                            install_fun = utils::install.packages,
@@ -45,15 +46,20 @@ please_install <- function(pkgs,
   invisible(pkgs)
 }
 
+imthcm_packages <- c('magrittr', 'lubridate', 'tibble', 'stats',
+  'assertive', 'dplyr', 'purrr', 'glue', 'nlme', 'mgcv', 'rlang', 'tidyr',
+  'stringr', 'xml2', 'here', 'ggplot2'
+)
 
 #' Check basic installed packages
 #'
 #' @param pkgs charachter vector of package(s) to check for presence
+#'        (default is the vector of packages needed for imthcm package)
 #' @param ... further options for install_fun
 #'
 #' @return invisible character vector with missing package
 #' @export
-check_pkg <- function(pkgs) {
+check_pkg <- function(pkgs = imthcm_packages) {
   have   <- rownames(utils::installed.packages())
   needed <- setdiff(pkgs, have)
 
