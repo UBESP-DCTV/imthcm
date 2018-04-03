@@ -59,7 +59,7 @@ plot_pred_event_outcomes <- function(pred_events, plot_file) {
 
   # Provide and possibly write the output -------------------------------
 
-  ggplot2::ggsave(plot_file)
+  ggplot2::ggsave(filename = plot_file, plot = outcome_plot)
 }
 
 

@@ -15,7 +15,7 @@
 #'   identical(events_history, test_health)
 #' }
 xml_to_health <- function(file) {
-  xml_data <- here::here(file) %>%
+  xml_data <- file %>%
     xml2::read_xml() %>%
     xml2::as_list()
 
