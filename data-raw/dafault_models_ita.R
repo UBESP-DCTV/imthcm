@@ -1,6 +1,6 @@
 # (Auto) load needed package ==========================================
-check_pkg('imthcm') %>%
-  please_install(
+imthcm::check_pkg('imthcm') %>%
+  imthcm:::please_install(
     install_fun = devtools::install_github,
     repo        = 'https://github.com/UBESP-DCTV/imthcm'
   )
