@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 
 [![Travis build status](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=master)](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=master)
 [![Coverage status](https://codecov.io/gh/UBESP-DCTV/imthcm/branch/master/graph/badge.svg)](https://codecov.io/github/UBESP-DCTV/imthcm?branch=master)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/UBESP-DCTV/imthcm?branch=master&svg=true)](https://ci.appveyor.com/project/UBESP-DCTV/imthcm)
 
 # imthcm
 

@@ -1,5 +1,12 @@
 # imthcm 0.1.2
 
+* Added `compute_cost.R` to compute the cost
+* Added `data-raw/meps_costs.rda` and `data/meps_costs` files to provide the
+    default costs retrieved from MEPA (cardiac: CHD, stroke; and
+    respiratory).
+* Added `.github/CONTRIBUTING.md` file 
+* Added support for AppVeyor CI
+
 # imtchm 0.1
 
 * Release 0.1

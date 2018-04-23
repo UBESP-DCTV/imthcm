@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis build status](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=master)](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=master) [![Coverage status](https://codecov.io/gh/UBESP-DCTV/imthcm/branch/master/graph/badge.svg)](https://codecov.io/github/UBESP-DCTV/imthcm?branch=master)
+[![Travis build status](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=master)](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=master) [![Coverage status](https://codecov.io/gh/UBESP-DCTV/imthcm/branch/master/graph/badge.svg)](https://codecov.io/github/UBESP-DCTV/imthcm?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/UBESP-DCTV/imthcm?branch=master&svg=true)](https://ci.appveyor.com/project/UBESP-DCTV/imthcm)
 
 imthcm
 ======
@@ -66,16 +66,16 @@ Now you have installed and loaded all the necessary package for the modules. The
 
 ``` r
 system.file('modules', 'hm.R', package = 'imthcm')
-#> [1] "/home/corrado/R/x86_64-pc-linux-gnu-library/3.4/imthcm/modules/hm.R"
+#> [1] "C:/Users/corra/Documents/R/win-library/3.4/imthcm/modules/hm.R"
 system.file('modules', 'cm.R', package = 'imthcm')
-#> [1] "/home/corrado/R/x86_64-pc-linux-gnu-library/3.4/imthcm/modules/cm.R"
+#> [1] "C:/Users/corra/Documents/R/win-library/3.4/imthcm/modules/cm.R"
 
 system.file('test_xml', 'test_event_history.xml',   package = 'imthcm')
-#> [1] "/home/corrado/R/x86_64-pc-linux-gnu-library/3.4/imthcm/test_xml/test_event_history.xml"
+#> [1] "C:/Users/corra/Documents/R/win-library/3.4/imthcm/test_xml/test_event_history.xml"
 system.file('test_xml', 'test_weather_history.xml', package = 'imthcm')
-#> [1] "/home/corrado/R/x86_64-pc-linux-gnu-library/3.4/imthcm/test_xml/test_weather_history.xml"
+#> [1] "C:/Users/corra/Documents/R/win-library/3.4/imthcm/test_xml/test_weather_history.xml"
 system.file('test_xml', 'test_weather_new.xml',     package = 'imthcm')
-#> [1] "/home/corrado/R/x86_64-pc-linux-gnu-library/3.4/imthcm/test_xml/test_weather_new.xml"
+#> [1] "C:/Users/corra/Documents/R/win-library/3.4/imthcm/test_xml/test_weather_new.xml"
 ```
 
 To run th emodules you have to say to the system that they are "executable" by
