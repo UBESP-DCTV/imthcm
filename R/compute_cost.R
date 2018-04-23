@@ -6,18 +6,6 @@
 #' whereas they were associated to Chronic obstructive pulmonary disease
 #' (COPD).
 #'
-#' Costs for Coronary Heart Disease (CHD) and stroke were derived from the
-#' report of the American Heart Association (1) (which reported data on
-#' costs derived from the Medical Expenditure Panel Survey (MEPS) of the
-#' U.S. Agency for Healthcare Research and Quality), considering 2015 data.
-#' Unitary costs (medical, indirect, and total) have been calculated by
-#' dividing the projected number of CHD and strokes by the corresponding
-#' projected costs (for 2015).
-#'
-#' Costs for COPD were derived from the paper of Fen et al (2). They were
-#' represented only by medical costs and referred to the year 2010. Also
-#' COPD costs reported in the paper were derived from the MEPS survey.
-#' Cost estimates are based on an exchange rate EUR-USD of 1.233.
 #'
 #' The output of the function is a data frame. The data frame is composed
 #' by simulated days: n rows and 6 columns. Each row gives the fitted
@@ -32,42 +20,47 @@
 #' to a particular health events.
 #'
 #'
-#' @param health_events_dataframe A data frame with predicted health events
+#' @param health_events A data frame with predicted health events
 #'        and relative 95% CI. Column names must be:
-#'          - \code(date)  = date of the simulated day;
-#'          - \code(event) = type of event (e.g. mortality for all causes,
+#'          - `date`  = date of the simulated day;
+#'          - `event` = type of event (e.g. mortality for all causes,
 #'                           hospitalizations for cardiac events, ...);
-#'          - \code(lower) = lower bound of 95% CI of average daily number
+#'          - `lower` = lower bound of 95% CI of average daily number
 #'                           of considered health event;
-#'          - \code(fit)   = average daily number of considered health
+#'          - `fit`   = average daily number of considered health
 #'                           event;
-#'          - \code(upper) = upper bound of 95% CI of average daily number
+#'          - `upper` = upper bound of 95% CI of average daily number
 #'                           of considered health event.
+#' @param costs A data frame with the related individual costs for events in
+#'        `health_events`. Column names must be:
+#'          - `event`           = events name as they appear in
+#'                                     `health_event`;
+#'          - `individual_cost` = individual costs for the related
+#'                                     events;
+#'          - `currences`       = currences in which each cost is
+#'                                     expressed.
 #'
+#' @param ... Other possible options passed to the function
+#' @param use_meps [lgl] (default = FALSE) use Medical Expenditure Panel
+#'        Survey (MEPS) of the U.S. Agency for Healthcare Research and
+#'        Quality costs data on weather if the user cannot provide more
+#'        specific data.
 #'
-#' @return a data frame with n_days*2 rows (where n_days is the number of
-#'         simulated days) and 8 columns. For each days, there are two rows
-#'         in the data frame: one for hospitalizations for cardiac diseases
-#'         and one for hospitalizations for respiratory diseases. The
-#'         columns contain respectively: date of the date of the
-#'         simulated day, the health outcomes, the 95% CI lower bound of the
-#'         predicted average daily number of events, the predicted average
-#'         daily number of events and the the 95% CI upper bound of the
-#'         predicted average daily number of events, the 95% CI lower bound
-#'         of costs associated to a particular health events, the average
-#'         daily costs associated to a particular health event and the 95%
-#'         CI upper bound of costs associated to a particular health events.
+#' @return a data frame with `n_days` * `n` rows (where
+#'         `n_days` is the number of simulated days, and `n` is
+#'         the number of events for which a cost was provided), and 7
+#'         columns:
+#'           - `date` for which the record is referred,
+#'           - `event` the event considered
+#'           - `currences` the currences used for the cost
+#'           - `lower_individual_cost` the 95% CI lower bound of the
+#'             cost
+#'           - `fit_individual_cost` the median cost
+#'           - `upper_individual_cost` the 95% CI upper bound of the
+#'             cost
 #'
-#' @import
 #' @export
 #'
-#' @references (1) Projections of cardiovascular disease prevalence and
-#'                 costs: 2015–2035 O Khavjou, D Phelps, A Leib - 2017.
-#'                 Available at: https://healthmetrics.heart.org/projections-of-cardiovascular-disease/;
-#'              (2) Total and State-Specific Medical and Absenteeism Costs
-#'                  of COPD Among Adults Aged 18 Years in the United States
-#'                  for 2010 and Projections Through 2020. Ford, Earl S. et
-#'                  al. CHEST, Volume 147, Issue 1, 31 - 45
 #'
 #' @examples
 #' \dontrun{
@@ -85,43 +78,42 @@
 #'   full_year = TRUE
 #' )
 #'
-#' compute_cost(hh_non_summer)
-#' compute_cost(hh_full_year)
+#' compute_cost(hh_non_summer, use_meps = TRUE)
+#' compute_cost(hh_non_summer, costs = meps_costs)
+#'
+#' compute_cost(hh_full_year, use_meps = TRUE)
+#' compute_cost(hh_full_year, costs = meps_costs)
 #' }
 
 
 # Compute costs ----------------------------------------------------------
-compute_cost <- function(health_events_dataframe){
+compute_cost <- function(health_events, costs = NULL, ...,
+    use_meps = is.null(costs)){
 
-  # Define individual cost for cardiac and respiratory hospitalizations
-  # (in Euro)
-  ind_cardiac_cost <- (9051.69 + 7184.98)/2
-  ind_resp_cost    <- 575.83
 
-  # Compute cardiac costs (individual average of stroke and CHD costs)
-  cardiac_hosp <- health_events_dataframe %>%
-    dplyr::filter(event == 'hosp_cardiac') %>%
+  # Input check ---------------------------------------------------------
+
+  assertive::assert_is_inherited_from(health_events, 'data.frame')
+  if (!is.null(cost)) {
+    assertive::assert_is_inherited_from(costs, 'data.frame')
+  } else {
+    assertive::assert_all_are_true(use_meps)
+  }
+  assertive::assert_is_a_bool(health_events)
+
+
+  if (use_meps) {
+    costs <- meps_costs
+  }
+
+  health_events %>%
+    dplyr::right_join(costs) %>%
     dplyr::mutate(
-      lower_costs = ind_cardiac_cost * lower,
-      fit_costs   = ind_cardiac_cost * fit,
-      upper_costs = ind_cardiac_cost * upper
-    )
-
-  # Compute respiratory costs (individual COPD costs)
-  resp_hosp <- health_events_dataframe %>%
-    dplyr::filter(event == 'hosp_resp') %>%
-    dplyr::mutate(
-      lower_costs = ind_resp_cost * lower,
-      fit_costs   = ind_resp_cost * fit,
-      upper_costs = ind_resp_cost * upper
-    )
-
-  # Bind dataframes and rename health event columns
-  dplyr::bind_rows(cardiac_hosp, resp_hosp) %>%
-    dplyr::rename(
-      lower_health_events = lower,
-      fit_health_events   = fit,
-      upper_health_events = upper
-    )
+      lower_individual_cost = lower * individual_cost,
+      fit_individual_cost   = fit   * individual_cost,
+      upper_individual_cost = upper * individual_cost
+    ) %>%
+    dplyr::select(-c(lower, fit, upper, individual_cost)) %>%
+    dplyr::arrange(date, event)
 }
 

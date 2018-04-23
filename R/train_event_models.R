@@ -73,13 +73,6 @@
 #' }
 
 
-# Input check ---------------------------------------------------------
-
-# assertive::assert_is_inherited_from()
-
-# Run -----------------------------------------------------------------
-
-
 train_event_models <- function(health_events_history = NULL,
                                weather_history = NULL,
                                ...,
