@@ -24,10 +24,10 @@ format.
 \examples{
 \dontrun{
   library(imthcm)
-  data(test_health)
-  xml_health <- 'test_health.xml'
-  health_to_xml(test_health, file = xml_health)
-  events_history <- xml_to_health(file = xml_health)
-  identical(events_history, test_health)
+  data(meps_costs)
+  xml_cost <- 'test_cost.xml'
+  cost_to_xml(meps_costs, file = xml_cost)
+  converted_costs <- xml_to_cost(file = xml_cost)
+  identical(converted_costs, meps_costs)
 }
 }
