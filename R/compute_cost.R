@@ -94,12 +94,12 @@ compute_cost <- function(health_events, costs = NULL, ...,
   # Input check ---------------------------------------------------------
 
   assertive::assert_is_inherited_from(health_events, 'data.frame')
-  if (!is.null(cost)) {
+  if (!is.null(costs)) {
     assertive::assert_is_inherited_from(costs, 'data.frame')
   } else {
     assertive::assert_all_are_true(use_meps)
   }
-  assertive::assert_is_a_bool(health_events)
+  assertive::assert_is_a_bool(use_meps)
 
 
   if (use_meps) {

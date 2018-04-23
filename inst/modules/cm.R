@@ -16,7 +16,7 @@ if (!requireNamespace('docopt', quietly = TRUE)) stop(
 ## returns a list in which the command line arguments are accessible in the
 ## usual way.
 'Usage:
-  hm.R [--events=<predicted_events> (--costs=<costs_tablesl> | --default) --output=<output> --figures=<figures_path>]
+  cm.R [--events=<predicted_events> (--costs=<costs_tablesl> | --default) --output=<output> --figures=<figures_path>]
 
 Options:
 -e <predicted_events> --events=<predicted_events>  Predicted events (hm.R module) [default: hm_output.xml]
@@ -66,7 +66,7 @@ cost_data <- if (opts[['--default']]) {
 # Run the module
 
 cm_model <- compute_cost(
-  health_events = xml_to_health(opts[['--events']]),
+  health_events = xml_to_prediction(opts[['--events']]),
   costs         = cost_data,
   use_meps      = opts[['--default']]
 )
