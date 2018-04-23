@@ -1,5 +1,8 @@
 # imthcm 0.1.2
 
+* Added `.github/CONTRIBUTING.md` file 
+* Added support for AppVeyor CI
+
 # imtchm 0.1
 
 * Release 0.1

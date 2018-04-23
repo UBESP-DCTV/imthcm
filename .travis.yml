@@ -5,11 +5,11 @@ sudo: false
 cache: packages
 
 os:
-- linux
+  - linux
 
 r:
-- release
-- devel
+  - release
+  - devel
 
 after_success:
-    - Rscript -e 'covr::codecov()'
+  - Rscript -e 'covr::codecov()'
