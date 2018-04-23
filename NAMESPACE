@@ -3,6 +3,7 @@
 export("%>%")
 export(check_pkg)
 export(compute_cost)
+export(cost_to_xml)
 export(health_to_xml)
 export(please_install)
 export(plot_pred_event_outcomes)
