@@ -1,9 +1,6 @@
 Package: imthcm
-Version: 0.1.2
 Title: Integrated Mdelling Tool -  Helath and Cost Modules
-Description: The goal of imthcm is to provide the **health** and **cost**
-  modules for the Integrated Modelling Tool of REMEDIO project.
-Maintainer: Corrado Lanera <corrado.lanera@unipd.it>
+Version: 0.1.2
 Authors@R: c(
     person('Corrado', 'Lanera', role  = c('aut', 'cre'),
       email = 'corrado.lanera@unipd.it'
@@ -21,39 +18,42 @@ Authors@R: c(
       email = 'dario.gregori@unipd.it'
     )
   )
+Maintainer: Corrado Lanera <corrado.lanera@unipd.it>
+Description: The goal of imthcm is to provide the **health** and **cost**
+  modules for the Integrated Modelling Tool of REMEDIO project.
 License: GPL-3
 URL: https://github.com/UBESP-DCTV/imthcm
 BugReports: https://github.com/UBESP-DCTV/imthcm/issues
-Encoding: UTF-8
-LazyData: true
-ByteCompile: true
-Suggests: 
-    testthat,
-    covr,
-    knitr,
-    rmarkdown,
-    MASS,
-    utils,
-    usethis,
-    devtools
-RoxygenNote: 6.0.1
 Depends: 
     R (>= 3.4)
 Imports: 
-    magrittr,
-    lubridate,
-    tibble,
-    stats,
     assertive,
     dplyr,
-    purrr,
+    ggplot2,
     glue,
-    nlme,
-    mgcv (>= 1.8.23),
-    rlang,
-    tidyr,
-    stringr,
-    xml2,
     here,
-    ggplot2
+    lubridate,
+    magrittr,
+    mgcv (>= 1.8.23),
+    nlme,
+    purrr,
+    rlang,
+    stats,
+    stringr,
+    tibble,
+    tidyr,
+    xml2
+Suggests: 
+    covr,
+    devtools,
+    knitr,
+    MASS,
+    rmarkdown,
+    testthat,
+    usethis,
+    utils
 VignetteBuilder: knitr
+ByteCompile: true
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
