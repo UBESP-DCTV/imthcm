@@ -80,7 +80,7 @@ predictions_to_xml(hm_predictions, file = opts[['--output']])
 
 if (opts[['--single']]) {
   plot_pred_event_outcomes(hm_predictions,
-    plot_file = opts[['--figure']]
+    plot_file = opts[['--figures']]
   )
 } else {
   plot_pred_event_outcomes_time(hm_predictions,
