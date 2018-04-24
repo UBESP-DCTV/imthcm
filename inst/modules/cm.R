@@ -75,15 +75,13 @@ cm_model <- compute_cost(
 
 # Provide/Save the output
 cost_to_xml(cm_model, file = opts[['--output']])
-#
-# if (opts[['--single']]) {
-#   plot_pred_event_outcomes(hm_predictions,
-#                            plot_file = opts[['--figure']]
-#   )
-# } else {
-#   plot_pred_event_outcomes_time(hm_predictions,
-#                                 plot_file = opts[['--figures']]
-#   )
-# }
+
+if (opts[['--single']]) {
+  plot_computed_cost(cm_model, plot_file = opts[['--figure']]
+  )
+} else {
+  plot_computed_cost_time(hm_predictions, plot_file = opts[['--figures']]
+  )
+}
 
 # END =================================================================
