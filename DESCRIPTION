@@ -1,6 +1,6 @@
 Package: imthcm
 Title: Integrated Mdelling Tool -  Helath and Cost Modules
-Version: 0.1.2
+Version: 0.2
 Authors@R: c(
     person('Corrado', 'Lanera', role  = c('aut', 'cre'),
       email = 'corrado.lanera@unipd.it'

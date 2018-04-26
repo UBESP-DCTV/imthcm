@@ -1,5 +1,9 @@
 # imthcm 0.1.2
 
+* Release 0.2
+
+# imthcm 0.1.2
+
 * Updated `README` file
 * Added `plot_computed_cost.R` and `plot_computed_cost_time.R` to compute
     and stor the plot for cm
