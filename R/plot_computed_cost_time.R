@@ -41,9 +41,9 @@
 #'   )
 #' }
 
-plot_computed_cost_time <- function(plot_data, plot_file){
+plot_computed_cost_time <- function(computed_costs, plot_file){
 
-  cost_plot <- plot_data %>%
+  cost_plot <- computed_costs %>%
     ggplot2::ggplot(ggplot2::aes(x = date, y = fit_individual_cost, colour = event)) +
     ggplot2::geom_point() +
     ggplot2::geom_smooth() +
@@ -57,5 +57,6 @@ plot_computed_cost_time <- function(plot_data, plot_file){
   # Provide and possibly write the output -------------------------------
 
   ggplot2::ggsave(filename = plot_file, plot = cost_plot)
+  invisible(cost_plot)
 }
 

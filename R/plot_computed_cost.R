@@ -75,4 +75,5 @@ plot_computed_costs <- function(computed_costs, plot_file) {
   # Provide and possibly write the output -------------------------------
 
   ggplot2::ggsave(filename = plot_file, plot = cost_plot)
+  invisible(cost_plot)
 }

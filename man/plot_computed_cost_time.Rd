@@ -5,12 +5,9 @@
 \title{Plot number of costs associated to predicted number of health events in
 function of time.}
 \usage{
-plot_computed_cost_time(plot_data, plot_file)
+plot_computed_cost_time(computed_costs, plot_file)
 }
 \arguments{
-\item{plot_file}{[chr] filename of the destination path. Format of image
-is automatically decided by the filename extension}
-
 \item{computed_costs}{[data frame] A data frame containing the
 following variables:
      - `date`: date of simulated day in format 'yyyy-mm-dd';
@@ -21,6 +18,9 @@ following variables:
         number of a particular health event;
      - `upper_individual_cost`: upper bound of 95% CI of costs
         associated to a particular health event.}
+
+\item{plot_file}{[chr] filename of the destination path. Format of image
+is automatically decided by the filename extension}
 }
 \value{
 A plot with time trends of the costs associated to the average
