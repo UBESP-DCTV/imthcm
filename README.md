@@ -1,6 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis build status](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=master)](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=master) [![Coverage status](https://codecov.io/gh/UBESP-DCTV/imthcm/branch/master/graph/badge.svg)](https://codecov.io/github/UBESP-DCTV/imthcm?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/UBESP-DCTV/imthcm?branch=master&svg=true)](https://ci.appveyor.com/project/UBESP-DCTV/imthcm)
+[![Travis build status](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=master)](https://travis-ci.org/UBESP-DCTV/imthcm.svg?branch=master) [![Coverage status](https://codecov.io/gh/UBESP-DCTV/imthcm/branch/master/graph/badge.svg)](https://codecov.io/github/UBESP-DCTV/imthcm?branch=master) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/oalfbbranadcxwp6?svg=true)](https://ci.appveyor.com/project/CorradoLanera/imthcm)
 
 imthcm
 ======
@@ -66,30 +66,42 @@ Now you have installed and loaded all the necessary package for the modules. The
 
 ``` r
 system.file('modules', 'hm.R', package = 'imthcm')
-#> [1] "C:/Users/corra/Documents/R/win-library/3.4/imthcm/modules/hm.R"
+#> [1] "C:/Users/corra/Documents/R/win-library/3.5/imthcm/modules/hm.R"
 system.file('modules', 'cm.R', package = 'imthcm')
-#> [1] "C:/Users/corra/Documents/R/win-library/3.4/imthcm/modules/cm.R"
+#> [1] "C:/Users/corra/Documents/R/win-library/3.5/imthcm/modules/cm.R"
 
 system.file('test_xml', 'test_event_history.xml',   package = 'imthcm')
-#> [1] "C:/Users/corra/Documents/R/win-library/3.4/imthcm/test_xml/test_event_history.xml"
+#> [1] "C:/Users/corra/Documents/R/win-library/3.5/imthcm/test_xml/test_event_history.xml"
 system.file('test_xml', 'test_weather_history.xml', package = 'imthcm')
-#> [1] "C:/Users/corra/Documents/R/win-library/3.4/imthcm/test_xml/test_weather_history.xml"
+#> [1] "C:/Users/corra/Documents/R/win-library/3.5/imthcm/test_xml/test_weather_history.xml"
 system.file('test_xml', 'test_weather_new.xml',     package = 'imthcm')
-#> [1] "C:/Users/corra/Documents/R/win-library/3.4/imthcm/test_xml/test_weather_new.xml"
+#> [1] "C:/Users/corra/Documents/R/win-library/3.5/imthcm/test_xml/test_weather_new.xml"
+system.file('test_xml', 'test_cost_data.xml',       package = 'imthcm')
+#> [1] "C:/Users/corra/Documents/R/win-library/3.5/imthcm/test_xml/test_cost_data.xml"
 ```
 
-To run th emodules you have to say to the system that they are "executable" by
+To run the modules on a linux machine, you have to let the system know that they are "executable" by
 
     chmod +x path/to/modules/folder/hm.R
     chmod +x path/to/modules/folder/cm.R
 
 Note, you can copy those files and run them everywhere you prefer: the modules automatically load the package and find inside every function they need. So suppose you have the Health Module in `./` and the examples XML files in `./test_xml/` folder respectively. So, e.g., you can run the module with italian defaults training data and models by the following command
 
-    ./hm.R -d -n ./test_xml/test_weather_new.xml -o my_output.xml -f my_figure.png
+    ./hm.R -d -n ./test_xml/test_weather_new.xml -o my_hm_output.xml -f my_hm_figure.png
 
 Or using the test XML history files (and also changing the figure device) by
 
-    ./hm.R -w ./test_xml/test_weather_history.xml -e ./test_xml/test_event_history.xml -n ./test_xml/test_weather_new.xml -o my_output.xml -f my_figure.pdf
+    ./hm.R -w ./test_xml/test_weather_history.xml -e ./test_xml/test_event_history.xml -n ./test_xml/test_weather_new.xml -o my_hm_output.xml -f my_hm_figure.pdf
+
+The same for the cost module, which should recieve in imput the output of the health modules. Hence, continuing our examples, cm can be run using default cost data by
+
+    ./cm.R -e my_hm_output.xml -d -o my_cm_output.xml -f my_cm_figure.png
+
+or providing custom cost data by
+
+    ./cm.R -e my_hm_output.xml -c ./test_xml/test_cost_data.xml -o my_cm_output.xml -f my_cm_figure.png
+
+(Please note that the last to command line will provide exactly the same output because the default cost data are the ones stored in `./test_xml/test_cost_data.xml`)
 
 Bug reports
 -----------
