@@ -1,3 +1,19 @@
+# imthcm 0.1.2
+
+* Release 0.2
+
+# imthcm 0.1.2
+
+* Updated `README` file
+* Added `plot_computed_cost.R` and `plot_computed_cost_time.R` to compute
+    and stor the plot for cm
+* Added `compute_cost.R` to compute the cost
+* Added `data-raw/meps_costs.rda` and `data/meps_costs` files to provide the
+    default costs retrieved from MEPA (cardiac: CHD, stroke; and
+    respiratory).
+* Added `.github/CONTRIBUTING.md` file 
+* Added support for AppVeyor CI
+
 # imtchm 0.1
 
 * Release 0.1

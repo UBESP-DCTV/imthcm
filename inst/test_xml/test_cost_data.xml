@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<costs>
+  <cost event="hosp_cardiac" individual_cost="8118.335" currences="euro"/>
+  <cost event="hosp_resp" individual_cost="575.83" currences="euro"/>
+</costs>
