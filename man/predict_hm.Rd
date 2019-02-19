@@ -6,7 +6,7 @@
 \usage{
 predict_hm(models, weather_history, weather_today, ..., full_year = (!"o38h"
   \%in\% names(weather_today)) || (all(purrr::map_lgl(models[["summer"]],
-  is.null))))
+  is.null))), digits = 4L)
 }
 \arguments{
 \item{models}{[lst] A list with 7 elements. Each element corresponds to
@@ -60,6 +60,9 @@ If \code{TRUE} full-year models are used. By default,
 full-year are used in the of missing summer- or non-summer-model
 or if \code{weather_history} or \code{weather_today} do not have
 ozone information (i.e., there are no \code{o38h} variable)}
+
+\item{digits}{integer indicating the number of decimal places (round).
+default is 4.}
 }
 \value{
 a data frame with the fitted value (i.e., average predicted

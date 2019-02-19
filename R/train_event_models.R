@@ -129,7 +129,7 @@ train_event_models <- function(health_events_history = NULL,
   full_year  <- purrr::map(events_considered,
     ~ mgcv::gam(
       formula = stats::as.formula(glue::glue("{.x} ~ lag_03_pm25 +
-        (year + month + day_week)^3 +
+        year:month:day_week +
         s(temp_mean, bs = 'cr') + s(press_bar_mean, bs = 'cr')"
       )),
       data    = health_events_data,
@@ -159,8 +159,8 @@ train_event_models <- function(health_events_history = NULL,
     # Summer model
     summer  <- purrr::map(events_considered,
       ~ mgcv::gam(
-        formula = stats::as.formula(glue::glue("{.x} ~ (year + month +
-          day_week)^3 + lag_03_pm25 + lag_03_o38h +
+        formula = stats::as.formula(glue::glue("{.x} ~ year:month:day_week +
+          lag_03_pm25 + lag_03_o38h +
           s(temp_mean, bs = 'cr') + s(press_bar_mean, bs = 'cr')"
         )),
         data    = dplyr::filter(health_events_data, is_summer) %>%
@@ -174,7 +174,7 @@ train_event_models <- function(health_events_history = NULL,
     non_summer  <- purrr::map(events_considered,
       ~ mgcv::gam(
         formula = stats::as.formula(glue::glue({.x},
-          " ~ (year + month + day_week)^3 + lag_03_pm25 +",
+          " ~ year:month:day_week + lag_03_pm25 +",
           "   s(temp_mean, bs = 'cr')  +",
           "   s(press_bar_mean, bs = 'cr')"
         )),

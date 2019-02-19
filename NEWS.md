@@ -1,4 +1,12 @@
-# imthcm 0.1.2
+# imthcm 0.2.1
+
+* Added `update_me()` function to automatically check for an updated version
+  of the package on GitHub.
+* Removed marginal interaction on the models for the dates
+* Predicted counts of events returner as real with custom number of digits
+  (default is 4).
+
+# imthcm 0.2
 
 * Release 0.2
 

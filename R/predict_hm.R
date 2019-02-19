@@ -63,6 +63,9 @@
 #'        or if \code{weather_history} or \code{weather_today} do not have
 #'        ozone information (i.e., there are no \code{o38h} variable)
 #'
+#' @param digits integer indicating the number of decimal places (round).
+#'        default is 4.
+#'
 #' @return a data frame with the fitted value (i.e., average predicted
 #'         events) including 95% Confidence Interval (column \code{lower}
 #'         and \code{upper}) for each type of event mange by the models used
@@ -90,7 +93,8 @@ predict_hm <- function(
   weather_today,
   ...,
   full_year = (!'o38h' %in% names(weather_today)) ||
-              (all(purrr::map_lgl(models[['summer']], is.null)))
+              (all(purrr::map_lgl(models[['summer']], is.null))),
+  digits = 4L
 ) {
 
 # Input check ---------------------------------------------------------
@@ -166,7 +170,8 @@ predict_hm <- function(
   ## full_year
   assertive::assert_is_a_bool(full_year)
 
-
+  ## digits
+  assertive::assert_is_an_integer(digits)
 
 # Data preparation ----------------------------------------------------
 
@@ -214,9 +219,9 @@ predict_hm <- function(
     dplyr::transmute(
       date  = full_weather[['date']][[actual_case]],
       event = names(models[[model_used[[actual_case]]]]),
-      lower = (stats::qchisq(0.025, 2 * fit) / 2) %>% as.integer(),
-      fit   = fit %>% as.integer(),
-      upper = (stats::qchisq(0.975, 2 * fit) / 2) %>% as.integer()
+      lower = (stats::qchisq(0.025, 2 * fit) / 2) %>% round(digits),
+      fit   = fit %>% round(digits),
+      upper = (stats::qchisq(0.975, 2 * fit) / 2) %>% round(digits)
     )
   }) %>%
     do.call(what = dplyr::bind_rows)
