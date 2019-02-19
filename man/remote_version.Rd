@@ -20,5 +20,5 @@ Get the version of the package in the remote
 url(
   'https://raw.githubusercontent.com/UBESP-DCTV/imthcm/master/DESCRIPTION'
 ) \%>\%
-remote_version()
+imthcm:::remote_version()
 }

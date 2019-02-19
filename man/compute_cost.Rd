@@ -4,7 +4,8 @@
 \alias{compute_cost}
 \title{Compute costs of related health events}
 \usage{
-compute_cost(health_events, costs = NULL, ..., use_meps = is.null(costs))
+compute_cost(health_events, costs = NULL, ...,
+  use_meps = is.null(costs))
 }
 \arguments{
 \item{health_events}{A data frame with predicted health events

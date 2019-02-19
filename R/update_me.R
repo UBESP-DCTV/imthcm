@@ -7,8 +7,10 @@
 #' @export
 #'
 #' @examples
-#' library(imthcm)
-#' update_me()
+#' \dontrun{
+#'     library(imthcm)
+#'     update_me()
+#' }
 update_me <- function() {
 
   if (!interactive()) {
@@ -102,8 +104,9 @@ update_me <- function() {
 #' @return an integer vector with the component of the version
 #'
 #' @examples
-#' parse_version('0.2.1')
-parse_version <- function (ver) {
+#' imthcm:::parse_version('0.2.1')
+
+parse_version <- function(ver) {
   stringr::str_split(ver, '\\.') %>%
     unlist() %>%
     as.integer()
@@ -120,7 +123,7 @@ parse_version <- function (ver) {
 #' url(
 #'   'https://raw.githubusercontent.com/UBESP-DCTV/imthcm/master/DESCRIPTION'
 #' ) %>%
-#' remote_version()
+#' imthcm:::remote_version()
 remote_version <- function(con) {
   readLines(con) %>%
     stringr::str_subset('[Vv]er') %>%

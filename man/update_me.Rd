@@ -14,6 +14,8 @@ Aim of this function is to check and eventually update the imthcm package
 with a possible new version on GitHub.
 }
 \examples{
-library(imthcm)
-update_me()
+\dontrun{
+    library(imthcm)
+    update_me()
+}
 }

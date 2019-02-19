@@ -16,5 +16,5 @@ an integer vector with the component of the version
 Parse version of a package
 }
 \examples{
-parse_version('0.2.1')
+imthcm:::parse_version('0.2.1')
 }

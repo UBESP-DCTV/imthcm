@@ -4,9 +4,9 @@
 \alias{predict_hm}
 \title{Predict function for Health module}
 \usage{
-predict_hm(models, weather_history, weather_today, ..., full_year = (!"o38h"
-  \%in\% names(weather_today)) || (all(purrr::map_lgl(models[["summer"]],
-  is.null))), digits = 4L)
+predict_hm(models, weather_history, weather_today, ...,
+  full_year = (!"o38h" \%in\% names(weather_today)) ||
+  (all(purrr::map_lgl(models[["summer"]], is.null))), digits = 4L)
 }
 \arguments{
 \item{models}{[lst] A list with 7 elements. Each element corresponds to

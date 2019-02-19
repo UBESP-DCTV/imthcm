@@ -206,3 +206,7 @@
 #'      Through 2020. Ford, Earl S. et al. CHEST, Volume 147, Issue 1, 31-45
 "meps_costs"
 
+#' West street data
+#'
+#' Data from the Padova's West street
+"west_data"

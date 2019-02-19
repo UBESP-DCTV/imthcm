@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<costs>
-  <cost date="2016-12-30" event="hosp_cardiac" currences="euro" lower_individual_cost="0" fit_individual_cost="0" upper_individual_cost="0"/>
-  <cost date="2016-12-30" event="hosp_resp" currences="euro" lower_individual_cost="0" fit_individual_cost="575.83" upper_individual_cost="1727.49"/>
-  <cost date="2016-12-31" event="hosp_cardiac" currences="euro" lower_individual_cost="0" fit_individual_cost="0" upper_individual_cost="0"/>
-  <cost date="2016-12-31" event="hosp_resp" currences="euro" lower_individual_cost="0" fit_individual_cost="575.83" upper_individual_cost="1727.49"/>
-</costs>
