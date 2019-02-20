@@ -135,7 +135,7 @@ remote_version <- function(con) {
 retrieve_remotes <- function() {
   ## Open a connection with the master and develop branches DESCRIPTION file
   #
-  cons <- map(c(master = 'master', develop = 'develop'), ~
+  cons <- purrr::map(c(master = 'master', develop = 'develop'), ~
     url(glue::glue(
       'https://raw.githubusercontent.com/UBESP-DCTV/imthcm/{.x}/DESCRIPTION'
     ))
