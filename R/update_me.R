@@ -34,8 +34,8 @@ update_me <- function() {
   l_remote  <- purrr::map_int(remotes, length)
   max_depth <- max(l_local, l_remote)
 
-  local_fill  <- (l_local  + 1L) : (max_depth + 1L)
-  remote_fill <- purrr::map(l_remote, ~ (.x + 1L) : (max_depth + 1L))
+  local_fill  <- (l_local  + 1L):(max_depth + 1L)
+  remote_fill <- purrr::map(l_remote, ~ (.x + 1L):(max_depth + 1L))
 
   local[local_fill]   <- 0L
   remotes <- purrr::map2(remotes, remote_fill, ~ {

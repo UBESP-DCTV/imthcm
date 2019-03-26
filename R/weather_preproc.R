@@ -36,10 +36,10 @@ weather_preproc <- function(weather_data) {
     dplyr::mutate(
 
       # time ----------------------------------------------------------
-      year     = lubridate::year(date)  %>% as.integer(),
-      month    = lubridate::month(date) %>% factor(levels = 1:12),
-      day      = lubridate::day(date)   %>% factor(levels = 1:30),
-      day_week = lubridate::wday(date)  %>% factor(levels = 1:7),
+      year     = lubridate::year(date) %>% as.integer(),
+      month    = lubridate::month(date) %>% as.integer(), # factor(levels = 1:12),
+      day      = as.numeric(date)/1000,   # factor(levels = 1:30),
+      day_week = lubridate::wday(date) %>% as.integer(),  # factor(levels = 1:7),
       # dd       = I(as.factor(year):as.factor(month):as.factor(day_week)),
 
       # lag -----------------------------------------------------------

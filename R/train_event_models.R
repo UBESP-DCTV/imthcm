@@ -98,17 +98,17 @@ train_event_models <- function(health_events_history = NULL,
     nrow(health_events_history)
   )
 
-  events_considered <- intersect(
+  events <- intersect(
     c(
-      'mort_all', 'mort_cardiac', 'mort_resp', 'mort_cer', 'hosp_cardiac',
-      'hosp_resp', 'hosp_cer'
+      'mort_all', 'mort_cardiac', 'mort_resp', 'mort_cer',
+      'hosp_cardiac', 'hosp_resp', 'hosp_cer'
     ),
     names(health_events_history)
   ) %>%
-    magrittr::set_names(., .)
+    purrr::set_names(.)
 
 
-  assertive::assert_all_are_true(length(events_considered) != 0)
+  assertive::assert_all_are_true(length(events) != 0)
 
 # Run -----------------------------------------------------------------
 
@@ -123,69 +123,55 @@ train_event_models <- function(health_events_history = NULL,
     health_events_history
   )
 
+  polluts <- paste0("lag_03_", c("pm10", "pm25", "no2", "o38h")) %>%
+      intersect(names(weather_data)) %>%
+      purrr::set_names(.)
+
+  polluts_no_o38h <- setdiff(polluts, "lag_03_o38h") %>%
+      purrr::set_names(.)
+
+  vars_to_consider <- c(events, polluts,
+    "temp_mean", "press_bar_mean",
+    "date", "day", "year", "month", "day_week",
+    "pm10", "pm25", "no2", "o38h"
+  )
+
+  train_data <- health_events_data[vars_to_consider] %>%
+      dplyr::mutate(is_summer = month %in% c(4, 5, 6, 7, 8, 9)) %>%
+      dplyr::filter_at(c(polluts, "pm10", "pm25", "no2", "o38h"),
+          dplyr::all_vars(. <= upper_2iqr(.))
+      ) %>%
+      ggplot2::remove_missing()
+
+  train_summer_data <- dplyr::filter(train_data, is_summer)
+  train_non_summer_data <- dplyr::filter(train_data, !is_summer)
 
 
   # Train for full year data
-  full_year  <- purrr::map(events_considered,
-    ~ mgcv::gam(
-      formula = stats::as.formula(glue::glue("{.x} ~ lag_03_pm25 +
-        year:month:day_week +
-        s(temp_mean, bs = 'cr') + s(press_bar_mean, bs = 'cr')"
-      )),
-      data    = health_events_data,
-      family  = stats::quasipoisson()
-    )
-  )
+    full_year <- events %>%
+        fit_hm(polluts, train_data) %>%
+        stats::setNames(events)
 
 
   # check for O3 presence
   if (all(is.na(weather_history[['o38h']]))) {
-    summer     <- stats::setNames(
-      vector('list', length(events_considered)),
-      events_considered
-    )
-    non_summer <- stats::setNames(
-      vector('list', length(events_considered)),
-      events_considered
-    )
+
+    summer <- vector('list', length(events)) %>% stats::setNames(events)
+    non_summer <- summer
+
   } else {
 
-    # split summer and non-summer data
-    health_events_data <- health_events_data %>%
-      dplyr::mutate(
-        is_summer = month %in% c(4, 5, 6, 7, 8, 9)
-    )
-
     # Summer model
-    summer  <- purrr::map(events_considered,
-      ~ mgcv::gam(
-        formula = stats::as.formula(glue::glue("{.x} ~ year:month:day_week +
-          lag_03_pm25 + lag_03_o38h +
-          s(temp_mean, bs = 'cr') + s(press_bar_mean, bs = 'cr')"
-        )),
-        data    = dplyr::filter(health_events_data, is_summer) %>%
-          dplyr::select(-is_summer) %>%
-          as.data.frame(),
-        family  = stats::quasipoisson()
-      )
-    )
+    summer <- events %>%
+        fit_hm(polluts, train_summer_data) %>%
+        stats::setNames(events)
 
     # Non-summer model
-    non_summer  <- purrr::map(events_considered,
-      ~ mgcv::gam(
-        formula = stats::as.formula(glue::glue({.x},
-          " ~ year:month:day_week + lag_03_pm25 +",
-          "   s(temp_mean, bs = 'cr')  +",
-          "   s(press_bar_mean, bs = 'cr')"
-        )),
-        data    = dplyr::filter(health_events_data, !is_summer) %>%
-          dplyr::select(-is_summer) %>%
-          as.data.frame(),
-        family  = stats::quasipoisson()
-      )
-    )
-  }
+    non_summer <- events %>%
+        fit_hm(polluts_no_o38h, train_non_summer_data) %>%
+        stats::setNames(events)
 
+  }
 
 
 

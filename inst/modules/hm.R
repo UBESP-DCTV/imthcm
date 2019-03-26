@@ -43,11 +43,8 @@ if (!requireNamespace('imthcm', quietly = TRUE)) stop(
   call. = FALSE
 )
 library(imthcm)
-check_pkg(c(
-  'magrittr', 'lubridate', 'tibble', 'stats', 'assertive', 'dplyr', 'purrr',
-  'glue', 'nlme', 'mgcv', 'rlang', 'tidyr', 'stringr', 'xml2', 'here',
-  'ggplot2'
-))
+check_pkg(imthcm:::imthcm_packages)
+imthcm::update_me()
 
 if (packageVersion('mgcv') < '1.8.23') {
   imthcm:::please_install('mgcv', dependencies = TRUE)

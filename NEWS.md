@@ -1,3 +1,9 @@
+* Changed day in `weather_preproc()` as numeric, i.e., as absolute 
+  number of day from a fixed point.
+* General restyling
+* Fixed a bug in `predict_hm()` in a test to check the correctness of
+  the input classes.
+
 # imthcm 0.2.1
 
 * Added `update_me()` function to automatically check for an updated version

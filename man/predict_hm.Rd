@@ -67,8 +67,8 @@ default is 4.}
 \value{
 a data frame with the fitted value (i.e., average predicted
         events) including 95% Confidence Interval (column \code{lower}
-        and \code{upper}) for each type of event mange by the models used
-        for each date considered.
+        and \code{upper}) for each type of event mange by the models
+        used for each date considered.
 }
 \description{
 This function predicts the number of considered health outcomes. Each
