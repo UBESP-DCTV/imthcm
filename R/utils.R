@@ -42,7 +42,7 @@ expand_4_pars_on <- function(.k) {
 pb_len <- function(.x, width = 76, show_after = 2, clear = FALSE) {
     progress::progress_bar$new(
         format =
-            "processing :what (:spin) [:bar] :percent in :elapsed [ETA: :eta]",
+            "fitting: :what [:bar] :percent in :elapsed [ETA: :eta]",
         total = .x,
         width = width,
         clear = clear,

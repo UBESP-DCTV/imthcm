@@ -148,6 +148,7 @@ train_event_models <- function(health_events_history = NULL,
 
 
   # Train for full year data
+    message("Full Year model evaluation.")
     full_year <- events %>%
         fit_hm(polluts, train_data) %>%
         stats::setNames(events)
@@ -162,11 +163,13 @@ train_event_models <- function(health_events_history = NULL,
   } else {
 
     # Summer model
+    message("Summer model evaluation.")
     summer <- events %>%
         fit_hm(polluts, train_summer_data) %>%
         stats::setNames(events)
 
     # Non-summer model
+    message("Non-summer model evaluation.")
     non_summer <- events %>%
         fit_hm(polluts_no_o38h, train_non_summer_data) %>%
         stats::setNames(events)
