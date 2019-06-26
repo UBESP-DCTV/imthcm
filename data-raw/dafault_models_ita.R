@@ -1,6 +1,6 @@
 # Load needed package =================================================
 library(imthcm)
-# source('path/to/epiair_db_venice_pre_proc.rda')            # reserved data
+# source('path/to/epiair_db_venice_pre_proc.rda')        # reserved data
 
 # Create base dataset -------------------------------------------------
 
@@ -21,7 +21,6 @@ event_models_ita <- train_event_models(
   ita_weather_history
 )
 
-
 # Save and store models -----------------------------------------------
 
-usethis::use_data(event_models_ita)
+usethis::use_data(event_models_ita, overwrite = TRUE, compress = "xz")
