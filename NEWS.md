@@ -1,3 +1,5 @@
+* Fix some dependencies
+* Update Travis
 * Changed day in `weather_preproc()` as numeric, i.e., as absolute 
   number of day from a fixed point.
 * General restyling
