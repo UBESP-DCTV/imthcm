@@ -1,3 +1,5 @@
+# imthcm 0.3.0
+
 * Fix some dependencies
 * Update Travis
 * Changed day in `weather_preproc()` as numeric, i.e., as absolute 
