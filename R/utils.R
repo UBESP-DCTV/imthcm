@@ -1,5 +1,5 @@
 upper_2iqr <- function(.x) {
-    .q <- quantile(.x, c(0.25, 0.75), names = FALSE, na.rm = TRUE)
+    .q <- stats::quantile(.x, c(0.25, 0.75), names = FALSE, na.rm = TRUE)
 
     .q[2] + 2 * diff(.q)
 }
@@ -73,7 +73,7 @@ best_model_for_a_pollut <- function(pollut, par_grid, event, data, pb) {
 }
 
 which_best <- function(models) {
-     which.min(purrr::map_dbl(models, BIC))
+     which.min(purrr::map_dbl(models, stats::BIC))
 }
 
 train_each_par <- function(par_grid, pollut, event, data, pb) {

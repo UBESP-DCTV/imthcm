@@ -19,7 +19,7 @@ update_me <- function() {
 
   ## Retrieve version of installed version of imthcm package
   #
-  local <- packageDescription('imthcm')[['Version']] %>%
+  local <- utils::packageDescription('imthcm')[['Version']] %>%
     parse_version()
 
   ## Retrieve the versions for master and develop branches
