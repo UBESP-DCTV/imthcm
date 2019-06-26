@@ -1,61 +1,66 @@
 Package: imthcm
-Title: Integrated Mdelling Tool -  Helath and Cost Modules
+Title: Integrated Mdelling Tool - Helath and Cost Modules
 Version: 0.2.1
-Authors@R: c(
-    person('Corrado', 'Lanera', role  = c('aut', 'cre'),
-      email = 'corrado.lanera@unipd.it'
-    ),
-    person('Daniele', 'Bottigliengo', role  = c('aut'),
-      email = 'daniele.bottigliengo@phd.unipd.it'
-    ),
-    person('Giulia', 'lorenzoni', role = c('aut'), 
-      email = 'giulia.lorenzoni@unipd.it'
-    ),
-    person('Cristina', 'Canova', role = c('aut'), 
-      email = 'cristina.canova@unipd.it'
-    ),
-    person('Dario', 'Gregori', role = c('aut'), 
-      email = 'dario.gregori@unipd.it'
-    )
-  )
+Authors@R: 
+    c(person(given = "Corrado",
+             family = "Lanera",
+             role = c("aut", "cre"),
+             email = "corrado.lanera@unipd.it"),
+      person(given = "Daniele",
+             family = "Bottigliengo",
+             role = "aut",
+             email = "daniele.bottigliengo@phd.unipd.it"),
+      person(given = "Giulia",
+             family = "lorenzoni",
+             role = "aut",
+             email = "giulia.lorenzoni@unipd.it"),
+      person(given = "Cristina",
+             family = "Canova",
+             role = "aut",
+             email = "cristina.canova@unipd.it"),
+      person(given = "Dario",
+             family = "Gregori",
+             role = "aut",
+             email = "dario.gregori@unipd.it"))
 Maintainer: Corrado Lanera <corrado.lanera@unipd.it>
-Description: The goal of imthcm is to provide the **health** and **cost**
-  modules for the Integrated Modelling Tool of REMEDIO project.
+Description: The goal of imthcm is to provide the **health** and
+    **cost** modules for the Integrated Modelling Tool of REMEDIO project.
 License: GPL-3
 URL: https://github.com/UBESP-DCTV/imthcm
 BugReports: https://github.com/UBESP-DCTV/imthcm/issues
 Depends: 
-    R (>= 3.4)
+    R (>= 3.5)
 Imports: 
-    assertive,
-    dplyr,
-    ggplot2,
-    glue,
-    here,
-    lubridate,
-    magrittr,
+    assertive (>= 0.3.5),
+    dplyr (>= 0.8.1),
+    ggplot2 (>= 3.2.0),
+    glue (>= 1.3.1),
+    here (>= 0.1),
+    lubridate (>= 1.7.4),
+    magrittr (>= 1.5),
     mgcv (>= 1.8.23),
+    MuMIn (>= 1.43.6),
     nlme,
-    purrr,
-    rlang,
+    progress (>= 1.2.2),
+    purrr (>= 0.3.2),
+    rlang (>= 0.3.4),
     stats,
-    stringr,
-    tibble,
-    tidyr,
-    xml2,
-    progress,
-    MuMIn
+    stringr (>= 1.4.0),
+    tibble (>= 2.1.3),
+    tidyr (>= 0.8.3),
+    xml2 (>= 1.2.0)
 Suggests: 
-    covr,
-    devtools,
-    knitr,
+    covr (>= 3.2.1),
+    devtools (>= 2.0.2),
+    docopt (>= 0.6.1),
+    knitr (>= 1.23),
     MASS,
-    rmarkdown,
-    testthat,
-    usethis,
-    utils,
-    docopt
-VignetteBuilder: knitr
+    rmarkdown (>= 1.13),
+    testthat (>= 2.1.1),
+    usethis (>= 1.5.0),
+    utils
+VignetteBuilder: 
+    knitr
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true
