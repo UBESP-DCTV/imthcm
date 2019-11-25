@@ -1,3 +1,5 @@
+# imthcm 0.3.1
+
 * Update training methods and default models (accordingly) 
 * Fixed documentation (#8), progressbar (#2), and bug in fit (#10)
 * Added dependency for `depigner` package for progressbar
