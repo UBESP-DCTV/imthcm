@@ -2,23 +2,24 @@
 #'
 #' This function predicts the number of considered health outcomes. Each
 #' outcome is predicted with GAM models previously trained on historical
-#' data. Once trained, GAM model estimates the number of health event of the
-#' simulated day with relative 95% CI. Predictions are returned as
-#' data frame. The data frame is composed by simulated days: n rows
-#' and 6 columns. Each row gives the fitted number, with relative 95% CI, of
-#' considered health outcomes for each simulated day. Each column represents
-#' respectively the date of the simulated day, the health outcomes, the
-#' 95% CI lower bound of the predicted average daily number of events, the
-#' predicted average daily number of events and the the 95% CI upper bound
-#' of the predicted average daily number of events.
+#' data. Once trained, GAM model estimates the number of health event of
+#' the simulated day with relative 95% CI. Predictions are returned as
+#' data frame. The data frame is composed by simulated days: n rows and
+#' 6 columns. Each row gives the fitted number, with relative 95% CI, of
+#' considered health outcomes for each simulated day. Each column
+#' represents respectively the date of the simulated day, the health
+#' outcomes, the 95% CI lower bound of the predicted average daily
+#' number of events, the predicted average daily number of events and
+#' the the 95% CI upper bound of the predicted average daily number of
+#' events.
 #'
-#' @param models [lst] A list with 7 elements. Each element corresponds to
-#'        previously trained model for the outcome of interest.
+#' @param models [lst] A list with 7 elements. Each element corresponds
+#'        to previously trained model for the outcome of interest.
 #'
-#' @param weather_history [data frame] A data frame with weather historical
-#'        data with number of rows equal to the lenght of
-#'        \code{health_events_history} and at least the following column
-#'        (with exactly the same column names):
+#' @param weather_history [data frame] A data frame with weather
+#'        historical data to use as history for each "today" predicted.
+#'        At least the following column (with exactly the same column
+#'        names) are needed:
 #'        - date           = date expressed in the format 'yyyy-mm-dd';
 #'        - temp_mean      = mean temperature of corresponding day
 #'                           (Celsius);
@@ -35,10 +36,10 @@
 #'        moving-means will be used (only for summer period, i.e., from
 #'        April, 1st, to September, 30th).
 #'
-#' @param weather_today [data frame] A data frame with data on weather of
-#'        the simulated day. The dataframe must contains a number of rows
-#'        equal to the lenght of \code{health_events_history} and at least
-#'        the following column (with exactly the same column names):
+#' @param weather_today [data frame] A data frame with data on weather
+#'        for the simulated day(s) to be predicted. The data frame must
+#'        contains at least the following column (with exactly the same
+#'        column names):
 #'        - date           = date expressed in the format 'yyyy-mm-dd';
 #'        - temp_mean      = mean temperature of corresponding day
 #'                           (Celsius);
@@ -54,6 +55,12 @@
 #'        of O3 daily maximum concentration for the daily 8-hours
 #'        moving-means will be used (only for summer period, i.e., from
 #'        April, 1st, to September, 30th).
+#'
+#' @note To provide teh prediction, the models use lags up to three
+#'       day in the past for every `weather_today` predicted. That means
+#'       that for each date/records in the `weather_today`, in the
+#'       `weather_history` there must be present at least information
+#'       upt to three days earlier (with the corresponding dates)
 #'
 #' @param ... possible further arguments passed to the function
 #' @param full_year [lgl] should the models (and prediction) be made on the
@@ -150,20 +157,29 @@ predict_hm <- function(
 
 # Data preparation ----------------------------------------------------
 
-  full_weather <- weather_today %>%
+
+  full_weather_nested <- weather_today %>%
     dplyr::distinct(date, .keep_all = TRUE) %>%
     dplyr::mutate(group_date = date) %>%
     dplyr::group_by(group_date) %>%
-    tidyr::nest(today_data = -group_date) %>%
+    tidyr::nest(today_data = -group_date)
+
+  pb <- depigner::pb_len(nrow(full_weather_nested))
+
+  full_weather <- full_weather_nested %>%
     dplyr::mutate(
       today_data = purrr::map(today_data, ~{
-        weather_history %>%
+        out <- weather_history %>%
           dplyr::filter(date %in% (.x[["date"]] - c(1, 2, 3))) %>%
           silent_full_join(.x) %>%
           weather_preproc() %>%
           dplyr::mutate(is_summer = month %in% c(4, 5, 6, 7, 8, 9)) %>%
           dplyr::filter(date == .x[["date"]]) %>%
           dplyr::distinct(date, .keep_all = TRUE)
+
+        depigner::tick(pb, paste(.x[["date"]], "(join info)"))
+
+        out
       })
     ) %>%
     tidyr::unnest(cols = today_data) %>%
@@ -187,22 +203,34 @@ predict_hm <- function(
     )
   )
 
-  purrr::map(row_ids, function(actual_case){
-    purrr::map_df(models[[model_used[[actual_case]]]],
-      ~ predict(
+
+  pb <- depigner::pb_len(length(row_ids))
+
+  res <- purrr::map(row_ids, function(actual_case){
+
+    predictions <- purrr::map_df(models[[model_used[[actual_case]]]],
+        ~ predict(
           object  = .x,
           newdata = full_weather[actual_case, ],
           type    = 'link',
           se.fit  = TRUE
+        )
       )
-    ) %>%
-    dplyr::transmute(
-      date  = full_weather[['date']][[actual_case]],
-      event = names(models[[model_used[[actual_case]]]]),
-      lower = exp(fit - 1.96 * se.fit) %>% round(digits),
-      fit   = exp(fit) %>% round(digits),
-      upper = exp(fit + 1.96 * se.fit) %>% round(digits)
+
+    depigner::tick(pb,
+        paste(names(row_ids[actual_case]), "(prediction)")
     )
+
+    dplyr::transmute(predictions,
+        date  = full_weather[['date']][[actual_case]],
+        event = names(models[[model_used[[actual_case]]]]),
+        lower = exp(fit - 1.96 * se.fit) %>% round(digits),
+        upper = exp(fit + 1.96 * se.fit) %>% round(digits),
+        fit   = exp(fit) %>% round(digits)
+    )
+
   }) %>%
     do.call(what = dplyr::bind_rows)
+
+  res
 }

@@ -17,15 +17,3 @@ fit_hm <- function(events, polluts, data,
     events %>%
         purrr::map(pollut_avg_event_model, polluts, par_grid, data, pb)
 }
-
-
-
-
-# data_to_use %>%
-#     dplyr::mutate(
-#         pma = predict(full_year$mort_cer, type = "response")
-#     ) %>%
-#     tidyr::gather("key", "value", mort_cer, pma) %>%
-#     ggplot2::ggplot(ggplot2::aes(x = pm10, y = value, color = key)) +
-#     geom_smooth()
-

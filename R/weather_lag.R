@@ -42,7 +42,6 @@ weather_lag <- function(x, k, na.rm = TRUE) {
 #' @describeIn weather_lag wrapper function to compute
 #'             \code{\link{weather_lag}} with \code{k} equal to 2, i.e., the
 #'             mean for today and yesterday.
-#' @inheritParams weather_lag
 #' @examples
 #' imthcm:::weather_lag01(c(1, 2, 3, 4, 5, 6))
 weather_lag01 <- function(x, na.rm = TRUE) {
@@ -55,7 +54,6 @@ weather_lag01 <- function(x, na.rm = TRUE) {
 #' @describeIn weather_lag wrapper function to compute
 #'             \code{\link{weather_lag}} with \code{k} equal to 4, i.e., the
 #'             mean for today and three prevous day.
-#' @inheritParams weather_lag
 #' @examples
 #' imthcm:::weather_lag03(c(1, 2, 3, 4, 5, 6))
 weather_lag03 <- function(x, na.rm = TRUE) {
