@@ -88,7 +88,7 @@ tick <- function(progress, what) {
 }
 
 train_hm <- function(.formula, data) {
-    mgcv::gam(.formula, mgcv::nb(), data, select = TRUE)
+    mgcv::gam(.formula, mgcv::nb(), data) #, select = TRUE)
 }
 
 silent_full_join <- function(...) {

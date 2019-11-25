@@ -138,9 +138,16 @@ train_event_models <- function(health_events_history = NULL,
 
   train_data <- health_events_data[vars_to_consider] %>%
       dplyr::mutate(is_summer = month %in% c(4, 5, 6, 7, 8, 9)) %>%
-      dplyr::filter_at(c(polluts, "pm10", "pm25", "no2", "o38h"),
-          dplyr::all_vars(. <= upper_2iqr(.))
-      ) %>%
+      ###
+      ### 20191125: Problemi di se che esplodono, possibile che sia per
+      ### mancanza di dati. Provo a rimuovere questo filtro per avere
+      ### più dati su cui fare il fit. In ogni modo, il modello ora
+      ### dovrebbe tenere correttamente conto anche delle
+      ### sovradispersioni.
+      ###
+      # dplyr::filter_at(c(polluts, "pm10", "pm25", "no2", "o38h"),
+      #     dplyr::all_vars(. <= upper_2iqr(.))
+      # ) %>%
       ggplot2::remove_missing()
 
   train_summer_data <- dplyr::filter(train_data, is_summer)
