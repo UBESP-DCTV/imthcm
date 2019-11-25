@@ -94,10 +94,10 @@ Three different type of GAM models were trained:
   \item One model for the summer period, which was defined as the period
         that goes from 04-01 to 09-30.
 
-\item One model for the non-summer period, which was defined as the
+  \item One model for the non-summer period, which was defined as the
         period that goes from 01-01 to 03-31 and to 10-01 to 12-31.
 
-\item One model for the all year.
+  \item One model for the all year.
 }
 
 All the three models were implemented assuming a Poisson distribution for

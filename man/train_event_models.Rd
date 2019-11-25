@@ -4,8 +4,12 @@
 \alias{train_event_models}
 \title{Events model trainer}
 \usage{
-train_event_models(health_events_history = NULL,
-  weather_history = NULL, ..., use_ita = FALSE)
+train_event_models(
+  health_events_history = NULL,
+  weather_history = NULL,
+  ...,
+  use_ita = FALSE
+)
 }
 \arguments{
 \item{health_events_history}{A data frame with historical health events

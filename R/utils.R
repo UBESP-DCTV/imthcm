@@ -91,4 +91,7 @@ train_hm <- function(.formula, data) {
     mgcv::gam(.formula, mgcv::nb(), data, select = TRUE)
 }
 
+silent_full_join <- function(...) {
+    suppressMessages(dplyr::full_join(...))
+}
 

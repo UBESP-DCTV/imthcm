@@ -154,19 +154,20 @@ predict_hm <- function(
     dplyr::distinct(date, .keep_all = TRUE) %>%
     dplyr::mutate(group_date = date) %>%
     dplyr::group_by(group_date) %>%
-    tidyr::nest(.key = "today_data") %>%
+    tidyr::nest(today_data = -group_date) %>%
     dplyr::mutate(
       today_data = purrr::map(today_data, ~{
         weather_history %>%
           dplyr::filter(date %in% (.x[["date"]] - c(1, 2, 3))) %>%
-          dplyr::full_join(.x) %>%
+          silent_full_join(.x) %>%
           weather_preproc() %>%
           dplyr::mutate(is_summer = month %in% c(4, 5, 6, 7, 8, 9)) %>%
           dplyr::filter(date == .x[["date"]]) %>%
           dplyr::distinct(date, .keep_all = TRUE)
       })
     ) %>%
-    tidyr::unnest() %>%
+    tidyr::unnest(cols = today_data) %>%
+    dplyr::ungroup() %>%
     dplyr::select(-group_date)
 
 
