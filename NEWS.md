@@ -1,3 +1,5 @@
+* removed dependency on depigner (which is not on CRAN yet)
+
 # imthcm 0.3.1
 
 * Update training methods and default models (accordingly) 

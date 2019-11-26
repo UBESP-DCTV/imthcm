@@ -164,7 +164,7 @@ predict_hm <- function(
     dplyr::group_by(group_date) %>%
     tidyr::nest(today_data = -group_date)
 
-  pb <- depigner::pb_len(nrow(full_weather_nested))
+  pb <- pb_len(nrow(full_weather_nested))
 
   full_weather <- full_weather_nested %>%
     dplyr::mutate(
@@ -177,7 +177,7 @@ predict_hm <- function(
           dplyr::filter(date == .x[["date"]]) %>%
           dplyr::distinct(date, .keep_all = TRUE)
 
-        depigner::tick(pb, paste(.x[["date"]], "(join info)"))
+        tick(pb, paste(.x[["date"]], "(join info)"))
 
         out
       })
@@ -204,29 +204,30 @@ predict_hm <- function(
   )
 
 
-  pb <- depigner::pb_len(length(row_ids))
+  pb <- pb_len(length(row_ids))
 
   purrr::map(row_ids, function(actual_case){
 
-      predictions <- models[[model_used[[actual_case]]]] %>%
-          purrr::map_df(predict,
-              object  = .x,
-              newdata = full_weather[actual_case, ],
-              type    = 'link',
-              se.fit  = TRUE
-          )
-
-      depigner::tick(pb,
-          paste(names(row_ids[actual_case]), "(prediction)")
+    predictions <- purrr::map_df(models[[model_used[[actual_case]]]],
+        ~ predict(
+          object  = .x,
+          newdata = full_weather[actual_case, ],
+          type    = 'link',
+          se.fit  = TRUE
+        )
       )
 
-      dplyr::transmute(predictions,
-          date  = full_weather[['date']][[actual_case]],
-          event = names(models[[model_used[[actual_case]]]]),
-          lower = exp(fit - 1.96 * se.fit) %>% round(digits),
-          upper = exp(fit + 1.96 * se.fit) %>% round(digits),
-          fit   = exp(fit) %>% round(digits)
-      )
+    tick(pb,
+        paste(names(row_ids[actual_case]), "(prediction)")
+    )
+
+    dplyr::transmute(predictions,
+        date  = full_weather[['date']][[actual_case]],
+        event = names(models[[model_used[[actual_case]]]]),
+        lower = exp(fit - 1.96 * se.fit) %>% round(digits),
+        upper = exp(fit + 1.96 * se.fit) %>% round(digits),
+        fit   = exp(fit) %>% round(digits)
+    )
 
   }) %>%
     do.call(what = dplyr::bind_rows)
