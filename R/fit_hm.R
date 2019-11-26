@@ -9,9 +9,10 @@
 
 # full_year <-
 fit_hm <- function(events, polluts, data,
-    par_grid = list(
-        best_par = c(k1 = 7, k2 = 7, k3 = 28, k4 = 7)
-    ) # expand_4_pars_on(c(7, 28))
+    par_grid = expand_4_pars_on(c(3, 5, 7))
+      # list(best_par = c(k1 = 7, k2 = 7, k3 = 28, k4 = 7))
+      # expand_4_pars_on(c(7, 28))
+      # expand_4_pars_on(c(3, 5, 7))
 ) {
     pb <- pb_len(length(par_grid) * length(polluts) * length(events))
     events %>%
