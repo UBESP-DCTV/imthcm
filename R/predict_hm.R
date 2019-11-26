@@ -206,31 +206,29 @@ predict_hm <- function(
 
   pb <- depigner::pb_len(length(row_ids))
 
-  res <- purrr::map(row_ids, function(actual_case){
+  purrr::map(row_ids, function(actual_case){
 
-    predictions <- purrr::map_df(models[[model_used[[actual_case]]]],
-        ~ predict(
-          object  = .x,
-          newdata = full_weather[actual_case, ],
-          type    = 'link',
-          se.fit  = TRUE
-        )
+      predictions <- models[[model_used[[actual_case]]]] %>%
+          purrr::map_df(predict,
+              object  = .x,
+              newdata = full_weather[actual_case, ],
+              type    = 'link',
+              se.fit  = TRUE
+          )
+
+      depigner::tick(pb,
+          paste(names(row_ids[actual_case]), "(prediction)")
       )
 
-    depigner::tick(pb,
-        paste(names(row_ids[actual_case]), "(prediction)")
-    )
-
-    dplyr::transmute(predictions,
-        date  = full_weather[['date']][[actual_case]],
-        event = names(models[[model_used[[actual_case]]]]),
-        lower = exp(fit - 1.96 * se.fit) %>% round(digits),
-        upper = exp(fit + 1.96 * se.fit) %>% round(digits),
-        fit   = exp(fit) %>% round(digits)
-    )
+      dplyr::transmute(predictions,
+          date  = full_weather[['date']][[actual_case]],
+          event = names(models[[model_used[[actual_case]]]]),
+          lower = exp(fit - 1.96 * se.fit) %>% round(digits),
+          upper = exp(fit + 1.96 * se.fit) %>% round(digits),
+          fit   = exp(fit) %>% round(digits)
+      )
 
   }) %>%
     do.call(what = dplyr::bind_rows)
 
-  res
 }
