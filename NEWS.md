@@ -1,3 +1,5 @@
+# imthcm 0.4.0
+
 # imthcm 0.3.2
 
 * removed dependency on depigner (which is not on CRAN yet)
