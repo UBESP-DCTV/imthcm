@@ -18,6 +18,9 @@
 #'
 #' @examples
 #' imthcm:::weather_lag(c(1, 2, 3, 4, 5, 6), 2)
+#' imthcm:::weather_lag(c(NA, 2, 3, 4, 5, 6), 2)
+#' imthcm:::weather_lag(c(NA, NA, 3, 4, 5, 6), 2)
+#' imthcm:::weather_lag(c(1, NA, 3, 4, 5, 6), 2)
 #' imthcm:::weather_lag(c(1, 2, 3, 4, 5, 6), 4)
 weather_lag <- function(x, k, na.rm = TRUE) {
 
@@ -31,7 +34,14 @@ weather_lag <- function(x, k, na.rm = TRUE) {
   # Run -----------------------------------------------------------------
 
   purrr::map_dbl(seq_along(x), ~{
-    if (.x < k) NA_real_ else mean(x[(.x - k + 1L):.x], na.rm = na.rm)
+
+    data_range <- x[max((.x - k + 1L), 1):.x]
+
+    if (all(is.na(data_range))) {
+      NA_real_
+    } else {
+      mean(data_range, na.rm = na.rm)
+    }
   })
 
 }
