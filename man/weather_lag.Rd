@@ -45,6 +45,9 @@ mean for today and three prevous day.
 
 \examples{
 imthcm:::weather_lag(c(1, 2, 3, 4, 5, 6), 2)
+imthcm:::weather_lag(c(NA, 2, 3, 4, 5, 6), 2)
+imthcm:::weather_lag(c(NA, NA, 3, 4, 5, 6), 2)
+imthcm:::weather_lag(c(1, NA, 3, 4, 5, 6), 2)
 imthcm:::weather_lag(c(1, 2, 3, 4, 5, 6), 4)
 imthcm:::weather_lag01(c(1, 2, 3, 4, 5, 6))
 imthcm:::weather_lag03(c(1, 2, 3, 4, 5, 6))

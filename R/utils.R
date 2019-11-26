@@ -68,19 +68,27 @@ polluts_models_for_event <- function(
 
 
 best_model_for_a_pollut <- function(pollut, par_grid, event, data, pb) {
-    train_each_par(par_grid, pollut, event, data, pb) %>%
-        .[[which_best(.)]]
-}
+
+        tick(pb, glue::glue("{event}/{pollut}"))
+
+        train_each_par(par_grid, pollut, event, data, pb) %>%
+            .[[which_best(.)]]
+
+    }
 
 which_best <- function(models) {
      which.min(purrr::map_dbl(models, stats::BIC))
 }
 
 train_each_par <- function(par_grid, pollut, event, data, pb) {
-    purrr::imap(par_grid, ~{
-        tick(pb, glue::glue("{event}/{pollut}/{.y}"))
+
+    oplan <- future::plan("multiprocess")
+    on.exit(future::plan(oplan), add = TRUE)
+
+    furrr::future_imap(par_grid, ~{
         train_hm(hm_formula_with_param(.x, event, pollut, data), data)
-    })
+    }, .progress = TRUE)
+
 }
 
 tick <- function(progress, what) {
